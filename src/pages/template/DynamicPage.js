@@ -24,7 +24,7 @@ export default function DynamicPage() {
     );
   }
   switch (page.template) {
-    case "/":
+    case "accueil":
       return <HomePage page={page} />;
     case "boutique":
       return <ShopPage page={page} />;

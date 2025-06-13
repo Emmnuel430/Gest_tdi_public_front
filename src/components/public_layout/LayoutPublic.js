@@ -38,8 +38,8 @@ function LayoutPublic({ children }) {
       <header className="fixed top-0 left-0 w-full bg-blue-950 text-white z-50 shadow-md">
         <div className="container mx-auto px-6">
           {/* Ligne 1 : Logo + Burger */}
-          <div className="flex justify-between items-center h-20">
-            <img src={logo} alt="logo" className="w-18 h-18" />
+          <div className="flex justify-between items-center py-3">
+            <img src={logo} alt="logo" className="w-30 h-30" />
 
             {/* Bouton hamburger */}
             <div
@@ -81,7 +81,7 @@ function LayoutPublic({ children }) {
       </header>
 
       {/* -------------------------------- */}
-      <div className="mt-[8rem] min-h-screen">{children}</div>
+      <div className="mt-[9rem] lg:mt-[12rem] min-h-screen">{children}</div>
       {/* -------------------------------- */}
 
       <footer

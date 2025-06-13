@@ -37,7 +37,7 @@ export default function SubsectionDetail() {
         <p className="text-center text-red-500">Contenu introuvable.</p>
       ) : (
         <>
-          <div className="max-w-4xl my-3 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
+          <div className="max-w-4xl mt-[11rem] lg:mt-[15rem] mb-3 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
             {/* Titre */}
             <h2 className="text-3xl font-semibold text-gray-800">
               {sub.title}
