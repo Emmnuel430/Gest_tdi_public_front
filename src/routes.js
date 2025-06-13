@@ -35,7 +35,7 @@ const AppRoutes = () => {
           path="/:slug"
           element={<DynamicPage key={window.location.pathname} />}
         />
-        <Route path="/accueil" element={<DynamicPage key="accueil" />} />
+        <Route path="/" element={<DynamicPage key="acceuil" />} />
         <Route path="/subsection/:id" element={<SubsectionDetail />} />
       </Routes>
     </BrowserRouter>

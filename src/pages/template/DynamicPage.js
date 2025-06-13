@@ -11,7 +11,7 @@ export default function DynamicPage() {
 
   useEffect(() => {
     const LINK = process.env.REACT_APP_API_URL;
-    fetch(`${LINK}/api/pages/${slug || "accueil"}`) // slug vide = accueil
+    fetch(`${LINK}/api/pages/${slug || "acceuil"}`) // slug vide = accueil
       .then((res) => res.json())
       .then((data) => setPage(data));
   }, [slug]);
@@ -24,7 +24,7 @@ export default function DynamicPage() {
     );
   }
   switch (page.template) {
-    case "accueil":
+    case "/":
       return <HomePage page={page} />;
     case "boutique":
       return <ShopPage page={page} />;
