@@ -1,76 +1,59 @@
-import React, { useEffect, useState } from "react";
-import LayoutPublic from "../components/public_layout/LayoutPublic";
-import Loader from "../components/Layout/Loader";
-// import { FaShoppingCart } from "react-icons/fa";
+import React, { useState } from "react";
+import LayoutPublic from "../../components/public_layout/LayoutPublic";
+import Loader from "../../components/Layout/Loader";
+import { Link } from "react-router-dom";
+import truncate from "html-truncate";
 
-const Produits = () => {
-  const API = process.env.REACT_APP_API_BASE_URL;
-  const LINK = process.env.REACT_APP_API_URL;
-  const [produits, setProduits] = useState([]);
+const ShopPage = ({ page }) => {
+  const produits =
+    page?.sections?.flatMap((section) => section.subsections || []) || [];
+  const LINK = process.env.REACT_APP_API_BASE_URL_STORAGE + "/";
   const [selectedProduits, setSelectedProduits] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [nomClient, setNomClient] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const fetchProduits = async () => {
-      try {
-        const res = await fetch(`${API}/liste_produits`);
-        const data = await res.json();
-        const sortedData = data.sort(
-          (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        );
-        setProduits(sortedData);
-      } catch (err) {
-        setError("Impossible de charger les produits.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduits();
-  }, [API]);
 
   const toggleSelection = (produit) => {
-    setSelectedProduits((prev) =>
-      prev.find((p) => p.id === produit.id)
-        ? prev.filter((p) => p.id !== produit.id)
-        : [...prev, produit]
-    );
+    const alreadySelected = selectedProduits.find((p) => p.id === produit.id);
+    if (alreadySelected) {
+      setSelectedProduits((prev) => prev.filter((p) => p.id !== produit.id));
+    } else {
+      setSelectedProduits((prev) => [...prev, produit]);
+    }
   };
 
   const handleOpenPanier = () => {
-    if (selectedProduits.length > 0) setShowModal(true);
+    if (selectedProduits.length > 0) {
+      setShowModal(true);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!nomClient.trim()) return;
     const whatsappNumber =
-      process.env.REACT_APP_WHATSAPP_NUMBER || "2250759414534"; // à adapter
+      process.env.REACT_APP_WHATSAPP_NUMBER || "2250759414534";
 
-    const produitsText = selectedProduits
-      .map((p) => `🛒 ${p.nom} - ${p.prix} FCFA`)
-      .join("%0A");
-
-    const message = `🛍️ *Demande d'information sur produit(s)*%0A%0A👤 *Nom du client :* ${nomClient}%0A%0A📦 *Produit(s) sélectionné(s) :*%0A${produitsText}%0A%0A📅 Bonjour, je suis intéressé(e) par le(s) produit(s) ci-dessus. Pourriez-vous me confirmer leur disponibilité ? Merci par avance.`;
+    const message = `Bonjour, je suis *${nomClient}*. Voici ma commande :%0A%0A${selectedProduits
+      .map((p) => `- ${p.title} (${Number(p.prix).toLocaleString()} FCFA)`)
+      .join("%0A")}%0A%0AMerci.`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
-    setShowModal(false);
-    setNomClient("");
-    setSelectedProduits([]);
   };
+
+  const loading = !page;
+  const error = page && produits.length === 0;
 
   return (
     <LayoutPublic>
       {/* En-tête */}
       <div className="mt-20 py-10 text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-blue-800">
-          Nos Produits
+          {page.title || ""}
         </h1>
         <p className="text-gray-600 mt-2">
+          {page.subtitle || ""} <br />
           Cliquez pour sélectionner les produits <br />
-          Puis valider votre commande en cliquant sur le panier ci-dessous
+          Puis validez votre commande en cliquant sur le panier ci-dessous
         </p>
 
         {/* Icône panier */}
@@ -96,7 +79,9 @@ const Produits = () => {
             <Loader />
           </div>
         ) : error ? (
-          <p className="text-center text-red-500">{error}</p>
+          <p className="text-center text-red-500">
+            Aucun produit disponible pour le moment.
+          </p>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {produits.map((produit) => {
@@ -114,19 +99,37 @@ const Produits = () => {
                   {produit.image && (
                     <img
                       src={`${LINK}${produit.image}`}
-                      alt={produit.nom}
+                      alt={produit.title}
                       className="w-full max-h-62 object-contain mb-4 bg-white rounded-lg"
                     />
                   )}
                   <h2 className="text-xl font-bold text-blue-900">
-                    {produit.nom}
+                    {produit.title}
                   </h2>
-                  <p className="text-gray-700 text-sm mt-1">
-                    {produit.description || "Pas de description."}
-                  </p>
                   <p className="text-blue-800 font-semibold mt-2">
-                    {Number(produit.prix).toLocaleString("fr-FR")} FCFA
+                    {Number(produit.prix || 0).toLocaleString("fr-FR")} FCFA
                   </p>
+
+                  {/* Contenu HTML */}
+                  {produit.content && (
+                    <div className="text-sm text-blue-800 flex-grow flex flex-col justify-between">
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: truncate(produit.content, 150),
+                        }}
+                      />
+                      {produit.content &&
+                        produit.content.replace(/<[^>]*>?/gm, "").length >
+                          150 && (
+                          <Link
+                            to={`/subsection/${produit.id}`}
+                            className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                          >
+                            Lire plus →
+                          </Link>
+                        )}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -151,7 +154,7 @@ const Produits = () => {
             <ul className="mb-4 list-disc pl-6 text-gray-700">
               {selectedProduits.map((p) => (
                 <li key={p.id}>
-                  {p.nom} - {p.prix} FCFA
+                  {p.title} - {Number(p.prix || 0).toLocaleString("fr-FR")} FCFA
                 </li>
               ))}
             </ul>
@@ -182,4 +185,4 @@ const Produits = () => {
   );
 };
 
-export default Produits;
+export default ShopPage;

@@ -1,44 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../../assets/img/logo.png"; // Mets ici ton chemin correct vers le logo
 import floral from "../../assets/img/floral-1.png"; // Mets ici ton chemin correct vers le logo
 import { Link, useLocation } from "react-router-dom";
 import UseNavbarInteractions from "../../assets/js/UseNavbarInteractions";
+// import DropdownFondements from "./DropdownFondements";
 
 function LayoutPublic({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const [pages, setPages] = useState([]);
+
+  useEffect(() => {
+    const API = process.env.REACT_APP_API_BASE_URL;
+    fetch(`${API}/pages`)
+      .then((res) => res.json())
+      .then((data) => setPages(data));
+  }, []);
+
+  const links = pages.map((page) => ({
+    label: page.title,
+    to: `/${page.slug}`,
+  }));
 
   const email = process.env.REACT_APP_EMAIL;
   const adresse = process.env.REACT_APP_ADRESSE;
   const telephone = process.env.REACT_APP_TELEPHONE;
 
-  const links = [
-    { to: "/", label: "ACCUEIL" },
-    { to: "/fondements", label: "NOS FONDEMENTS" },
-    { to: "/parachiot", label: "LES PARACHIOT" },
-    { to: "/etudes", label: "ETUDE" },
-    { to: "/boutique", label: "BOUTIQUE" },
-  ];
+  // const links = [
+  //   { to: "/", label: "ACCUEIL" },
+  //   { to: "/parachiot", label: "LES PARACHIOT" },
+  //   { to: "/etudes", label: "ETUDE" },
+  //   { to: "/boutique", label: "BOUTIQUE" },
+  // ];
 
   return (
     <>
-      <header
-        className="fixed w-full top-0 left-0 z-50 transition-all duration-300 ease-in-out"
-        id="navbar"
-      >
-        <nav className="mx-auto px-6 container flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
-          <div className="text-xl flex items-center gap-2">
-            <img src={logo} alt="logo" />
+      <header className="fixed top-0 left-0 w-full bg-blue-950 text-white z-50 shadow-md">
+        <div className="container mx-auto px-6">
+          {/* Ligne 1 : Logo + Burger */}
+          <div className="flex justify-between items-center h-20">
+            <img src={logo} alt="logo" className="w-18 h-18" />
+
+            {/* Bouton hamburger */}
+            <div
+              className="lg:hidden text-3xl text-white cursor-pointer z-50"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <i
+                className={`ri-${menuOpen ? "close-line" : "menu-4-line"}`}
+              ></i>
+            </div>
           </div>
 
-          {/* Menu */}
+          {/* Ligne 2 : Menu */}
           <div
-            className={`absolute top-0 ${
-              menuOpen ? "left-0" : "left-[-100%]"
-            } min-h-[100vh] w-full bg-blue-950/80 backdrop-blur-sm flex items-center justify-center duration-300 overflow-hidden lg:static lg:min-h-fit lg:bg-transparent lg:w-auto`}
+            className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40 ${
+              menuOpen ? "top-[80px]" : "top-[-100vh]"
+            } 
+      lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto`}
           >
-            <ul className="flex flex-col items-center gap-8 lg:flex-row text-white mb-0">
+            <ul className="flex flex-col justify-center items-center gap-8 py-6 lg:flex-row lg:py-4 h-[100vh] lg:h-auto">
               {links.map((link) => (
                 <li key={link.to}>
                   <Link
@@ -53,21 +74,14 @@ function LayoutPublic({ children }) {
                   </Link>
                 </li>
               ))}
+              {/* <DropdownFondements /> */}
             </ul>
           </div>
-
-          {/* Bouton hamburger */}
-          <div
-            className="lg:hidden text-xl sm:text-3xl text-white cursor-pointer z-50"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <i className={`ri-${menuOpen ? "close-line" : "menu-4-line"}`}></i>
-          </div>
-        </nav>
+        </div>
       </header>
 
       {/* -------------------------------- */}
-      <div className="min-h-screen">{children}</div>
+      <div className="mt-[8rem] min-h-screen">{children}</div>
       {/* -------------------------------- */}
 
       <footer
@@ -118,18 +132,11 @@ function LayoutPublic({ children }) {
           <div>
             <h4 className="mb-4 font-bold text-lg">Navigation</h4>
             <ul className="space-y-2">
-              <li>
-                <Link to="/">Accueil</Link>
-              </li>
-              <li>
-                <Link to="/fondements">Nos Fondements</Link>
-              </li>
-              <li>
-                <Link to="/parachiot">Les Parachiot</Link>
-              </li>
-              <li>
-                <Link to="/etude">Étude</Link>
-              </li>
+              {links.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to}>{link.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
