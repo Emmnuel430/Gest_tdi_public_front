@@ -125,7 +125,7 @@ function LayoutPublic({ children }) {
             <img src={logo} alt="logo" className="mx-auto md:mx-0 w-40 h-40" />
             <p className="mt-4 text-sm opacity-70">
               Une communauté unie par l'Etude de la Torah, par le Service Divin
-              et par les Actes de charités et de bienfaisance.
+              et par les Actes de charité et de bienfaisance.
             </p>
           </div>
 
