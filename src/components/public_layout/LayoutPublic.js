@@ -5,33 +5,32 @@ import { Link, useLocation } from "react-router-dom";
 import UseNavbarInteractions from "../../assets/js/UseNavbarInteractions";
 // import DropdownFondements from "./DropdownFondements";
 
+const email = process.env.REACT_APP_EMAIL;
+const adresse = process.env.REACT_APP_ADRESSE;
+const telephone = process.env.REACT_APP_TELEPHONE;
+
 function LayoutPublic({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const [pages, setPages] = useState([]);
+  const [ads, setAds] = useState([]);
 
+  const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
   useEffect(() => {
+    //data[data.length - 1]
     const API = process.env.REACT_APP_API_BASE_URL;
     fetch(`${API}/pages`)
       .then((res) => res.json())
       .then((data) => setPages(data));
+    fetch(`${API}/ads`)
+      .then((res) => res.json())
+      .then((data) => setAds(data[data.length - 1]));
   }, []);
 
   const links = pages.map((page) => ({
     label: page.title,
     to: `/${page.slug}`,
   }));
-
-  const email = process.env.REACT_APP_EMAIL;
-  const adresse = process.env.REACT_APP_ADRESSE;
-  const telephone = process.env.REACT_APP_TELEPHONE;
-
-  // const links = [
-  //   { to: "/", label: "ACCUEIL" },
-  //   { to: "/parachiot", label: "LES PARACHIOT" },
-  //   { to: "/etudes", label: "ETUDE" },
-  //   { to: "/boutique", label: "BOUTIQUE" },
-  // ];
 
   return (
     <>
@@ -40,6 +39,25 @@ function LayoutPublic({ children }) {
           {/* Ligne 1 : Logo + Burger */}
           <div className="flex justify-between items-center py-3">
             <img src={logo} alt="logo" className="w-30 h-30" />
+
+            {/* Zone d'affichage pour PC uniquement */}
+            {ads && (
+              <div className="hidden lg:block">
+                <div className="flex gap-4">
+                  <Link
+                    to={`/${ads.affiche_lien}` || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={`${STORAGE}/${ads.affiche_image}`}
+                      alt={ads.affiche_titre || `Affiche ${ads.affiche_titre}`}
+                      className="max-h-[8rem] rounded shadow-md"
+                    />
+                  </Link>
+                </div>
+              </div>
+            )}
 
             {/* Bouton hamburger */}
             <div
