@@ -51,7 +51,7 @@ function LayoutPublic({ children }) {
                   >
                     <img
                       src={`${STORAGE}/${ads.affiche_image}`}
-                      alt={ads.affiche_titre || `Affiche ${ads.affiche_titre}`}
+                      alt={`Affiche ${ads.affiche_titre}`}
                       className="max-h-[8rem] rounded shadow-md"
                     />
                   </Link>
