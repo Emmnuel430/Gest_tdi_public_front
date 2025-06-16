@@ -71,13 +71,13 @@ function LayoutPublic({ children }) {
           </div>
 
           {/* Ligne 2 : Menu */}
+          {/* Ligne 2 : Menu mobile */}
           <div
             className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40 ${
-              menuOpen ? "top-[80px]" : "top-[-100vh]"
-            } 
-      lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto`}
+              menuOpen ? "top-0 h-[100vh]" : "top-[-100vh]"
+            } lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto lg:h-auto`}
           >
-            <ul className="flex flex-col justify-center items-center gap-8 py-6 lg:flex-row lg:py-4 h-[100vh] lg:h-auto">
+            <ul className="flex flex-col justify-center items-center gap-8 py-6 lg:flex-row lg:py-4 lg:h-auto">
               {links.map((link) => (
                 <li key={link.to}>
                   <Link
@@ -92,7 +92,6 @@ function LayoutPublic({ children }) {
                   </Link>
                 </li>
               ))}
-              {/* <DropdownFondements /> */}
             </ul>
           </div>
         </div>
