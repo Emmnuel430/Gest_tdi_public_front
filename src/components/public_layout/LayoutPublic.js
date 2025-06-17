@@ -79,11 +79,15 @@ function LayoutPublic({ children }) {
 
           {/* Ligne 2 : Menu */}
           <div
-            className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40 ${
+            className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40  ${
               menuOpen ? "top-0 h-[100vh]" : "top-[-100vh]"
-            } lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto lg:h-auto`}
+            } overflow-y-auto lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto lg:h-auto lg:overflow-visible`}
           >
-            <ul className="flex flex-col justify-center items-center gap-8 py-6 lg:flex-row lg:py-4 lg:h-auto">
+            <ul
+              className="flex flex-col justify-center items-center gap-8 py-6 
+               lg:flex-wrap lg:justify-center lg:items-center lg:flex-row 
+               lg:gap-6 lg:px-6 lg:py-4"
+            >
               {links.map((link) => (
                 <li key={link.to}>
                   <Link
