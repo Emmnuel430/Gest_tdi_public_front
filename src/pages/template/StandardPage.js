@@ -29,10 +29,13 @@ const StandardPage = ({ page }) => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }
-            : {}
+            : {
+                backgroundColor: "#f0f9ff", // Couleur de fond si pas d'image
+                backgroundSize: "cover",
+              }
         }
       >
-        <div className="max-w-xl bg-white/80 p-8">
+        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
             {page.title}
           </h1>

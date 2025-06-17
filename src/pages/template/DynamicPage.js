@@ -47,7 +47,7 @@ export default function DynamicPage() {
 
   switch (page.template) {
     case "accueil":
-      return <HomePage page={page} />;
+      return <HomePage currentPage={page} />;
     case "boutique":
       return <ShopPage page={page} />;
     case "dons":

@@ -17,14 +17,21 @@ function LayoutPublic({ children }) {
 
   const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
   useEffect(() => {
-    //data[data.length - 1]
     const API = process.env.REACT_APP_API_BASE_URL;
+
     fetch(`${API}/pages`)
       .then((res) => res.json())
       .then((data) => setPages(data));
+
     fetch(`${API}/ads`)
       .then((res) => res.json())
-      .then((data) => setAds(data[data.length - 1]));
+      .then((data) => {
+        const lastTwoActives = data
+          .filter((ad) => ad.actif === 1)
+          .reverse()
+          .slice(0, 2);
+        setAds(lastTwoActives);
+      });
   }, []);
 
   const links = pages.map((page) => ({
@@ -41,21 +48,21 @@ function LayoutPublic({ children }) {
             <img src={logo} alt="logo" className="w-30 h-30" />
 
             {/* Zone d'affichage pour PC uniquement */}
-            {ads && (
-              <div className="hidden lg:block">
-                <div className="flex gap-4">
+            {ads && ads.length > 0 && (
+              <div className="hidden lg:flex gap-4">
+                {ads.map((ad, index) => (
                   <Link
-                    to={`/${ads.affiche_lien}` || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    key={index}
+                    to={`/${ad.affiche_lien || "#"}`}
+                    className="group block"
                   >
                     <img
-                      src={`${STORAGE}/${ads.affiche_image}`}
-                      alt={`Affiche ${ads.affiche_titre}`}
-                      className="max-h-[8rem] rounded shadow-md"
+                      src={`${STORAGE}/${ad.affiche_image}`}
+                      alt={`Affiche ${ad.affiche_titre || "promotion"}`}
+                      className="h-[8rem] rounded shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl"
                     />
                   </Link>
-                </div>
+                ))}
               </div>
             )}
 
@@ -71,7 +78,6 @@ function LayoutPublic({ children }) {
           </div>
 
           {/* Ligne 2 : Menu */}
-          {/* Ligne 2 : Menu mobile */}
           <div
             className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40 ${
               menuOpen ? "top-0 h-[100vh]" : "top-[-100vh]"
@@ -98,7 +104,7 @@ function LayoutPublic({ children }) {
       </header>
 
       {/* -------------------------------- */}
-      <div className="mt-[9rem] lg:mt-[12rem] min-h-screen">{children}</div>
+      <div className="mt-[9rem] lg:mt-[12.6rem] min-h-screen">{children}</div>
       {/* -------------------------------- */}
 
       <footer

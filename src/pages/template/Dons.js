@@ -5,11 +5,15 @@ const Dons = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête */}
-      <section className="bg-blue-100 py-16 text-center">
-        <h1 className="text-4xl font-bold text-blue-900 mb-4">{page.title}</h1>
-        {page.subtitle && (
-          <p className="text-lg text-blue-800">{page.subtitle}</p>
-        )}
+      <section className="bg-blue-100 py-16 text-center flex items-center justify-center">
+        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
+          <h1 className="text-4xl font-bold text-blue-900 mb-4">
+            {page.title}
+          </h1>
+          {page.subtitle && (
+            <p className="text-lg text-blue-800">{page.subtitle}</p>
+          )}
+        </div>
       </section>
 
       {/* Contenu dons */}
@@ -24,7 +28,7 @@ const Dons = ({ page }) => {
               {section.subsections.map((sub, index) => (
                 <div
                   key={sub.id}
-                  className="w-full max-w-xs bg-white shadow-lg rounded-2xl p-6 flex flex-col justify-between min-h-[400px]"
+                  className="w-full max-w-xs bg-white shadow-lg rounded-2xl p-6 flex flex-col justify-between min-h-[300px]"
                 >
                   <div className="text-center">
                     {sub.image && (
@@ -42,9 +46,6 @@ const Dons = ({ page }) => {
                       dangerouslySetInnerHTML={{ __html: sub.content }}
                     />
                   </div>
-                  <button className="mt-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                    {sub.content.replace(/<\/?[^>]+(>|$)/g, "")}
-                  </button>
                 </div>
               ))}
             </div>

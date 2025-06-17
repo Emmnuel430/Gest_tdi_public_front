@@ -165,11 +165,6 @@ h3 {
 }
 /* Style du conteneur de chaque capture */
 
-.swiper-wrapper {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .capture-container {
   background-color: white;
   border-radius: 12px; /* Bordures arrondies */
