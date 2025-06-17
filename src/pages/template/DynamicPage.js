@@ -6,6 +6,7 @@ import StandardPage from "./StandardPage";
 import ShopPage from "./ShopPage";
 import Dons from "./Dons";
 import NotFound from "../NotFound"; // ⬅️ Le composant 404
+import MembresTemplate from "./MembresTemplate";
 
 export default function DynamicPage() {
   const { slug } = useParams();
@@ -50,6 +51,8 @@ export default function DynamicPage() {
       return <HomePage currentPage={page} />;
     case "boutique":
       return <ShopPage page={page} />;
+    case "membres":
+      return <MembresTemplate page={page} />;
     case "dons":
       return <Dons page={page} />;
     default:
