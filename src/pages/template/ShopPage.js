@@ -8,6 +8,7 @@ const ShopPage = ({ page }) => {
   const produits =
     page?.sections?.flatMap((section) => section.subsections || []) || [];
   const LINK = process.env.REACT_APP_API_BASE_URL_STORAGE + "/";
+  const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
   const [selectedProduits, setSelectedProduits] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [nomClient, setNomClient] = useState("");
@@ -46,31 +47,46 @@ const ShopPage = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête */}
-      <div className="mt-20 py-10 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-blue-800">
-          {page.title || ""}
-        </h1>
-        <p className="text-gray-600 mt-2">
-          {page.subtitle || ""} <br />
-          Cliquez pour sélectionner les produits <br />
-          Puis validez votre commande en cliquant sur le panier ci-dessous
-        </p>
 
-        {/* Icône panier */}
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={handleOpenPanier}
-            className="relative text-blue-800 hover:text-blue-600"
-          >
-            <i className="fas fa-shopping-cart text-4xl"></i>
-            {selectedProduits.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                {selectedProduits.length}
-              </span>
-            )}
-          </button>
+      <section
+        className={`${
+          page.main_image ? "" : "bg-blue-100"
+        } h-[50vh] bg-cover bg-center flex items-center justify-center`}
+        style={
+          page.main_image
+            ? {
+                backgroundImage: `url(${STORAGE}/${page.main_image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : { backgroundColor: "#f0f9ff", backgroundSize: "cover" }
+        }
+      >
+        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-800">
+            {page.title || ""}
+          </h1>
+          <p className="text-gray-600 mt-2">
+            {page.subtitle || ""} <br />
+            Cliquez pour sélectionner les produits <br />
+            Puis validez votre commande en cliquant sur le panier ci-dessous
+          </p>
+
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={handleOpenPanier}
+              className="relative text-blue-800 hover:text-blue-600"
+            >
+              <i className="fas fa-shopping-cart text-4xl"></i>
+              {selectedProduits.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                  {selectedProduits.length}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Contenu */}
       <section className="px-4 md:px-16 py-10 bg-white">

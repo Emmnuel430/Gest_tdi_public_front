@@ -2,12 +2,26 @@ import React from "react";
 import LayoutPublic from "../../components/public_layout/LayoutPublic";
 
 const Dons = ({ page }) => {
+  const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
   return (
     <LayoutPublic>
       {/* En-tête */}
-      <section className="bg-blue-100 py-16 text-center flex items-center justify-center">
+      <section
+        className={`${
+          page.main_image ? "" : "bg-blue-100"
+        } h-[50vh] bg-cover bg-center flex items-center justify-center`}
+        style={
+          page.main_image
+            ? {
+                backgroundImage: `url(${STORAGE}/${page.main_image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : { backgroundColor: "#f0f9ff", backgroundSize: "cover" }
+        }
+      >
         <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
-          <h1 className="text-4xl font-bold text-blue-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
             {page.title}
           </h1>
           {page.subtitle && (
