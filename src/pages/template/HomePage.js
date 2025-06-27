@@ -81,122 +81,105 @@ const HomePage = ({ currentPage }) => {
             return (
               <section
                 key={section.id}
-                className="w-full py-16 bg-gray-100 px-4 md:px-8 lg:px-16"
+                className="w-full bg-gray-100 py-16 px-4 md:px-8 lg:px-16"
               >
-                <div className="max-w-screen-xl mx-auto space-y-8">
-                  {/* Bloc principal section */}
+                <div className="max-w-screen-xl mx-auto space-y-10">
+                  {/* Image & texte disposition */}
                   <div
-                    className={`flex flex-col lg:flex-row ${
-                      !isEven ? "lg:flex-row-reverse" : ""
-                    } items-start gap-8`}
+                    className={`flex flex-col ${
+                      isEven ? "lg:flex-row" : "lg:flex-row-reverse"
+                    } items-center justify-center gap-8`}
                   >
-                    {/* Colonne 1 : Texte + sous-sections */}
-                    <div className="space-y-6 order-2 lg:order-1 flex-1">
-                      {/* Titre / Sous-titre */}
-                      <div className={`${isEven ? "text-left" : "text-right"}`}>
-                        {section.title && (
-                          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
-                            {section.title}
-                          </h2>
-                        )}
-                        {section.subtitle && (
-                          <p className="text-blue-800 text-md lg:text-lg mb-2">
-                            {section.subtitle}
-                          </p>
-                        )}
-                      </div>
-
-                      {/* Sous-sections */}
-                      {section.subsections.length > 0 && (
-                        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
-                          {section.subsections.map((sub) => (
-                            <div
-                              key={sub.id}
-                              className="bg-white rounded-2xl shadow hover:shadow-lg transition flex flex-col h-[320px]"
-                            >
-                              {/* Image ou placeholder */}
-                              <div className="w-full h-32 rounded-t-2xl overflow-hidden">
-                                {sub.image ? (
-                                  <img
-                                    src={`${STORAGE}/${sub.image}`}
-                                    alt={sub.title || "Subsection"}
-                                    className="w-full h-full object-cover"
-                                  />
-                                ) : (
-                                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">
-                                    <i className="fas fa-image fa-2x"></i>
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Contenu */}
-                              <div className="flex flex-col justify-between flex-grow p-4">
-                                <div>
-                                  {sub.title && (
-                                    <h3 className="text-md font-semibold text-blue-900 mb-1">
-                                      {sub.title}
-                                    </h3>
-                                  )}
-
-                                  {(sub.date || sub.prix) && (
-                                    <p className="text-xs text-blue-700 mb-2">
-                                      {sub.date && (
-                                        <span>
-                                          {new Date(
-                                            sub.date
-                                          ).toLocaleDateString()}
-                                        </span>
-                                      )}
-                                      {sub.date && sub.prix && " · "}
-                                      {sub.prix && <span>{sub.prix} €</span>}
-                                    </p>
-                                  )}
-                                </div>
-
-                                {/* Description en bas */}
-                                <div className="text-sm text-blue-800 mt-2 overflow-hidden">
-                                  {sub.content && (
-                                    <>
-                                      <div
-                                        className="line-clamp-3 text-sm"
-                                        dangerouslySetInnerHTML={{
-                                          __html: truncate(sub.content, 100),
-                                        }}
-                                      />
-                                      {sub.content.replace(/<[^>]*>?/gm, "")
-                                        .length > 100 && (
-                                        <Link
-                                          to={`/subsection/${sub.id}`}
-                                          className="border border-blue-600 text-blue-600 hover:underline inline-block mt-2 p-1 rounded-md text-xs"
-                                        >
-                                          Lire plus →
-                                        </Link>
-                                      )}
-                                    </>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Colonne 2 : Image principale */}
-                    <div className="order-1 lg:order-2 flex justify-center w-full lg:w-[40%]">
+                    {/* Image de section */}
+                    <div className="w-full lg:w-1/2 flex justify-center">
                       {section.image ? (
                         <img
                           src={`${STORAGE}/${section.image}`}
                           alt={section.title || "Section"}
-                          className="rounded-2xl w-full max-h-[300px] object-cover shadow-lg"
+                          className="rounded-2xl w-full max-w-md h-[300px] object-cover shadow-lg"
                         />
                       ) : (
-                        <div className="w-full h-[300px] bg-blue-100 rounded-2xl flex items-center justify-center text-blue-400 shadow-lg">
+                        <div className="w-full max-w-md h-[300px] bg-blue-100 rounded-2xl flex items-center justify-center text-blue-400 shadow-lg">
                           <i className="fas fa-image fa-2x"></i>
                         </div>
                       )}
                     </div>
+
+                    {/* Titre et sous-titre */}
+                    <div className="w-full lg:w-1/2 text-center">
+                      {section.title && (
+                        <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
+                          {section.title}
+                        </h2>
+                      )}
+                      {section.subtitle && (
+                        <p className="text-blue-800 text-md lg:text-lg">
+                          {section.subtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Sous-sections */}
+                  {section.subsections.length > 0 && (
+                    <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                      {section.subsections.map((sub) => (
+                        <div
+                          key={sub.id}
+                          className="bg-white rounded-xl shadow-md flex flex-col h-[280px] overflow-hidden"
+                        >
+                          {/* Image ou placeholder */}
+                          <div className="h-28 w-full overflow-hidden">
+                            {sub.image ? (
+                              <img
+                                src={`${STORAGE}/${sub.image}`}
+                                alt={sub.title}
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">
+                                <i className="fas fa-image fa-lg"></i>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Contenu texte */}
+                          <div className="p-3 flex flex-col justify-between flex-grow">
+                            <div>
+                              <h5 className="text-md font-semibold text-blue-900">
+                                {sub.title}
+                              </h5>
+                              {(sub.date || sub.prix) && (
+                                <p className="text-sm text-blue-700 mb-2">
+                                  {sub.date &&
+                                    new Date(sub.date).toLocaleDateString()}
+                                  {sub.date && sub.prix && " · "}
+                                  {sub.prix && `${sub.prix} €`}
+                                </p>
+                              )}
+                            </div>
+
+                            <div className="text-sm text-blue-800 mt-2 flex-grow overflow-hidden">
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: truncate(sub.content, 100),
+                                }}
+                              />
+                              {sub.content.replace(/<[^>]*>?/gm, "").length >
+                                100 && (
+                                <Link
+                                  to={`/subsection/${sub.id}`}
+                                  className="text-blue-600 hover:underline text-xs mt-2 inline-block"
+                                >
+                                  Lire plus →
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </section>
             );
