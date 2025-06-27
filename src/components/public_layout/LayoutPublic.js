@@ -116,7 +116,7 @@ function LayoutPublic({ children }) {
                 href={`${process.env.REACT_APP_BACKOFFICE_URL}/adherent/login`}
                 className="nav-link transition duration-300 hover:text-yellow-500"
               >
-                Se connecter{" "}
+                Mon Espace Membre
               </a>
             </ul>
           </div>

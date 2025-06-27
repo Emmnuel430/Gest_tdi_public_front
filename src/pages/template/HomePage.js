@@ -88,10 +88,10 @@ const HomePage = ({ currentPage }) => {
                   <div
                     className={`flex flex-col lg:flex-row ${
                       !isEven ? "lg:flex-row-reverse" : ""
-                    } items-center gap-8`}
+                    } items-start gap-8`}
                   >
                     {/* Colonne 1 : Texte + sous-sections */}
-                    <div className="space-y-6 order-2 lg:order-1">
+                    <div className="space-y-6 order-2 lg:order-1 flex-1">
                       {/* Titre / Sous-titre */}
                       <div className={`${isEven ? "text-left" : "text-right"}`}>
                         {section.title && (
@@ -108,15 +108,14 @@ const HomePage = ({ currentPage }) => {
 
                       {/* Sous-sections */}
                       {section.subsections.length > 0 && (
-                        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+                        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
                           {section.subsections.map((sub) => (
                             <div
                               key={sub.id}
-                              className="bg-white rounded-2xl shadow hover:shadow-lg transition p-0 flex flex-col h-full"
+                              className="bg-white rounded-2xl shadow hover:shadow-lg transition flex flex-col h-[320px]"
                             >
-                              {/* Image */}
                               {/* Image ou placeholder */}
-                              <div className="w-full h-40 rounded-t-2xl overflow-hidden">
+                              <div className="w-full h-32 rounded-t-2xl overflow-hidden">
                                 {sub.image ? (
                                   <img
                                     src={`${STORAGE}/${sub.image}`}
@@ -134,13 +133,13 @@ const HomePage = ({ currentPage }) => {
                               <div className="flex flex-col justify-between flex-grow p-4">
                                 <div>
                                   {sub.title && (
-                                    <h3 className="text-lg font-semibold text-blue-900 mb-1">
+                                    <h3 className="text-md font-semibold text-blue-900 mb-1">
                                       {sub.title}
                                     </h3>
                                   )}
 
                                   {(sub.date || sub.prix) && (
-                                    <p className="text-sm text-blue-700 mb-2">
+                                    <p className="text-xs text-blue-700 mb-2">
                                       {sub.date && (
                                         <span>
                                           {new Date(
@@ -155,10 +154,11 @@ const HomePage = ({ currentPage }) => {
                                 </div>
 
                                 {/* Description en bas */}
-                                <div className="text-sm text-blue-800 mt-2 flex-grow">
+                                <div className="text-sm text-blue-800 mt-2 overflow-hidden">
                                   {sub.content && (
                                     <>
                                       <div
+                                        className="line-clamp-3 text-sm"
                                         dangerouslySetInnerHTML={{
                                           __html: truncate(sub.content, 100),
                                         }}
@@ -167,7 +167,7 @@ const HomePage = ({ currentPage }) => {
                                         .length > 100 && (
                                         <Link
                                           to={`/subsection/${sub.id}`}
-                                          className="border border-blue-600 text-blue-600 hover:underline inline-block mt-2 p-1 rounded-md"
+                                          className="border border-blue-600 text-blue-600 hover:underline inline-block mt-2 p-1 rounded-md text-xs"
                                         >
                                           Lire plus →
                                         </Link>
@@ -183,15 +183,19 @@ const HomePage = ({ currentPage }) => {
                     </div>
 
                     {/* Colonne 2 : Image principale */}
-                    {section.image && (
-                      <div className="order-1 lg:order-2 flex justify-center">
+                    <div className="order-1 lg:order-2 flex justify-center w-full lg:w-[40%]">
+                      {section.image ? (
                         <img
                           src={`${STORAGE}/${section.image}`}
                           alt={section.title || "Section"}
-                          className="rounded-2xl max-w-full max-h-[60vh] object-cover shadow-lg"
+                          className="rounded-2xl w-full max-h-[300px] object-cover shadow-lg"
                         />
-                      </div>
-                    )}
+                      ) : (
+                        <div className="w-full h-[300px] bg-blue-100 rounded-2xl flex items-center justify-center text-blue-400 shadow-lg">
+                          <i className="fas fa-image fa-2x"></i>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </section>
