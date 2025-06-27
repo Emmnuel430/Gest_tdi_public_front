@@ -186,9 +186,7 @@ const HomePage = ({ currentPage }) => {
                     {section.image && (
                       <div className="order-1 lg:order-2 flex justify-center">
                         <img
-                          src={
-                            section.image
-                          }
+                          src={`${STORAGE}/${section.image}`}
                           alt={section.title || "Section"}
                           className="rounded-2xl max-w-full max-h-[60vh] object-cover shadow-lg"
                         />
