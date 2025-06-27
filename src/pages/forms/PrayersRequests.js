@@ -67,7 +67,7 @@ const PrayersRequests = () => {
         setErrorMsg(data.message || "Une erreur est survenue.");
       }
     } catch (err) {
-      setErrorMsg("Erreur réseau ou serveur.");
+      setErrorMsg("Erreur réseau ou serveur. Réessayez svp.");
     } finally {
       setLoading(false);
     }
