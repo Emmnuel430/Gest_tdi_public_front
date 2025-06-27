@@ -80,7 +80,7 @@ function LayoutPublic({ children }) {
           {/* Ligne 2 : Menu */}
           <div
             className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40  ${
-              menuOpen ? "top-0 h-[100vh]" : "top-[-100vh]"
+              menuOpen ? "top-0 h-[100vh]" : "top-[-120vh]"
             } overflow-y-auto lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto lg:h-auto lg:overflow-visible`}
           >
             <ul
@@ -102,13 +102,29 @@ function LayoutPublic({ children }) {
                   </Link>
                 </li>
               ))}
+              <Link
+                to="/prayers-request"
+                className={`nav-link transition duration-300 ${
+                  location.pathname === "/prayers-request"
+                    ? "font-bold underline underline-offset-4 text-yellow-500"
+                    : "opacity-80 hover:opacity-100"
+                }`}
+              >
+                Demande de prière
+              </Link>
+              <a
+                href={`${process.env.REACT_APP_BACKOFFICE_URL}/adherent/login`}
+                className="nav-link transition duration-300 hover:text-yellow-500"
+              >
+                Se connecter{" "}
+              </a>
             </ul>
           </div>
         </div>
       </header>
 
       {/* -------------------------------- */}
-      <div className="mt-[9rem] lg:mt-[12.6rem] min-h-screen">{children}</div>
+      <div className="mt-[9rem] lg:mt-[16.6rem] min-h-screen">{children}</div>
       {/* -------------------------------- */}
 
       <footer

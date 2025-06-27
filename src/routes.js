@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DynamicPage from "./pages/template/DynamicPage";
 import SubsectionDetail from "./pages/SubsectionDetail";
 import NotFound from "./pages/NotFound";
+import PrayersRequests from "./pages/forms/PrayersRequests";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
           path="/:slug"
           element={<DynamicPage key={window.location.pathname} />}
         />
+        <Route path="/prayers-request" element={<PrayersRequests />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

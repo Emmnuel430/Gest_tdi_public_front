@@ -3,6 +3,7 @@ import LayoutPublic from "../../components/public_layout/LayoutPublic";
 import Loader from "../../components/Layout/Loader";
 import { Link } from "react-router-dom";
 import truncate from "html-truncate";
+import AdhesionForm from "../forms/AdhesionForm";
 
 const MembresTemplate = ({ page }) => {
   const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
@@ -136,7 +137,10 @@ const MembresTemplate = ({ page }) => {
           </a>
         </section>
       )}
-
+      {/* Formulaire d'adhésion */}
+      <section className="my-12 px-4">
+        <AdhesionForm />
+      </section>
       {/* Autres sections (avec sous-sections) */}
       {otherSections.length > 0 && (
         <div className="mt-16 px-4">
