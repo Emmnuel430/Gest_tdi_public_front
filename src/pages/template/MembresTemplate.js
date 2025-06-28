@@ -116,16 +116,16 @@ const MembresTemplate = ({ page }) => {
         </section>
       )}
 
-      <hr className="my-8 border-t border-gray-300" />
+      <hr className="my-2 border-t border-gray-300" />
 
       {/* Section 2 : Fiche d’adhésion */}
       {sectionAdhesion && (
-        <section className="mt-10 text-center px-4">
+        <section className="mt-4 text-center px-2">
           <h2 className="text-2xl font-semibold mb-3">
             {sectionAdhesion.title}
           </h2>
           <p className="text-gray-700 mb-5">
-            Cliquez sur le bouton ci-dessous pour nous rejoindre.
+            Cliquez sur le bouton ci-dessous pour nous rejoindre sur WhatsApp.
           </p>
           <a
             href={sectionAdhesion.subtitle}

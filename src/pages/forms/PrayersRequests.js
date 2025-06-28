@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LayoutPublic from "../../components/public_layout/LayoutPublic";
 // import Loader from "../../components/Layout/Loader";
 import ToastMessage from "../../components/Layout/ToastMessage";
+import MoyensPaiementSlider from "../MoyensPaiementSlider";
 
 const PrayersRequests = () => {
   const [form, setForm] = useState({
@@ -104,7 +105,7 @@ const PrayersRequests = () => {
           <form
             onSubmit={handleSubmit}
             encType="multipart/form-data"
-            className="bg-[#f9f9f9] py-10 px-6 md:px-10 rounded-xl shadow-md max-w-2xl mx-auto"
+            className="bg-[#f9f9f9] py-10 px-6 md:px-10 rounded-xl shadow-md mx-auto"
           >
             <h2 className="text-2xl font-bold text-blue-800 text-center mb-2">
               Formulaire de demande de prière
@@ -207,11 +208,13 @@ const PrayersRequests = () => {
 
             {/* MOYEN DE PAIEMENT */}
             <div className="mb-4">
-              <p className="text-sm italic">
-                Voir la page "Tsedaka" pour les numéros de transfert
-              </p>
+              <hr className="my-2 bg-gray-400 h-[3px]" />
+              <div>
+                <MoyensPaiementSlider />
+              </div>
+              <hr className="my-2 bg-gray-400 h-[3px]" />
               <label className="block font-semibold text-gray-700 mb-1">
-                Moyen de paiement *
+                Moyen de paiement utilisé *
               </label>
               <select
                 name="moyen_paiement"

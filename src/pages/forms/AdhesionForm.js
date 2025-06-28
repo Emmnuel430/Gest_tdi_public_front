@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ToastMessage from "../../components/Layout/ToastMessage";
+import MoyensPaiementSlider from "../MoyensPaiementSlider";
 
 export default function AdhesionForm() {
   const [form, setForm] = useState({
@@ -175,11 +176,13 @@ export default function AdhesionForm() {
 
         {/* MOYEN DE PAIEMENT */}
         <div className="mb-4">
-          <p className="text-sm italic">
-            Voir la page "Tsedaka" pour les numéros de transfert
-          </p>
+          <hr className="my-2 bg-gray-400 h-[3px]" />
+          <div>
+            <MoyensPaiementSlider />
+          </div>
+          <hr className="my-2 bg-gray-400 h-[3px]" />
           <label className="block font-semibold text-gray-700 mb-1">
-            Moyen de paiement *
+            Moyen de paiement utilisé *
           </label>
           <select
             name="moyen_paiement"

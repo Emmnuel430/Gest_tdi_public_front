@@ -45,27 +45,41 @@ function LayoutPublic({ children }) {
         <div className="container mx-auto px-6">
           {/* Ligne 1 : Logo + Burger */}
           <div className="flex justify-between items-center py-3">
-            <img src={logo} alt="logo" className="w-30 h-30" />
+            <Link to="/" className="inline-block">
+              <img src={logo} alt="logo" className="w-28 h-28 object-contain" />
+            </Link>
 
             {/* Zone d'affichage pour PC uniquement */}
-            {ads && ads.length > 0 && (
-              <div className="hidden lg:flex gap-4">
-                {ads.map((ad, index) => (
-                  <Link
-                    key={index}
-                    to={`/${ad.affiche_lien || "#"}`}
-                    className="group block"
-                  >
-                    <img
-                      src={`${STORAGE}/${ad.affiche_image}`}
-                      alt={`Affiche ${ad.affiche_titre || "promotion"}`}
-                      className="h-[8rem] rounded shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl"
-                    />
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div className="flex items-center gap-6">
+              {ads && ads.length > 0 && (
+                <div className="hidden lg:flex gap-4">
+                  {ads.map((ad, index) => (
+                    <Link
+                      key={index}
+                      to={`/${ad.affiche_lien || "#"}`}
+                      className="group block"
+                    >
+                      <img
+                        src={`${STORAGE}/${ad.affiche_image}`}
+                        alt={`Affiche ${ad.affiche_titre || "promotion"}`}
+                        className="h-[8rem] rounded shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:shadow-xl"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
 
+              <Link
+                to="/prayers-request"
+                className={`block text-center font-semibold px-6 py-5 rounded-xl text-white text-lg transition duration-300 ${
+                  location.pathname === "/prayers-request"
+                    ? "bg-yellow-600 shadow-lg"
+                    : "bg-yellow-800 hover:bg-yellow-600 hover:shadow-md"
+                }`}
+              >
+                Demande de prière
+              </Link>
+            </div>
             {/* Bouton hamburger */}
             <div
               className="lg:hidden text-3xl text-white cursor-pointer z-50"
@@ -102,21 +116,11 @@ function LayoutPublic({ children }) {
                   </Link>
                 </li>
               ))}
-              <Link
-                to="/prayers-request"
-                className={`nav-link transition duration-300 ${
-                  location.pathname === "/prayers-request"
-                    ? "font-bold underline underline-offset-4 text-yellow-500"
-                    : "opacity-80 hover:opacity-100"
-                }`}
-              >
-                Demande de prière
-              </Link>
               <a
                 href={`${process.env.REACT_APP_BACKOFFICE_URL}/adherent/login`}
                 className="nav-link transition duration-300 hover:text-yellow-500"
               >
-                Mon Espace Membre
+                Mon Espace
               </a>
             </ul>
           </div>
