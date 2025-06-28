@@ -233,7 +233,7 @@ const HomePage = ({ currentPage }) => {
                                     className="h-full object-contain"
                                   />
                                 ) : (
-                                  <div className="w-full h-[120px] bg-blue-100 flex items-center justify-center text-blue-400">
+                                  <div className="w-full h-[120px] bg-blue-100 flex items-center justify-evenly text-blue-400">
                                     <i className="fas fa-image fa-lg"></i>
                                   </div>
                                 )}
@@ -254,7 +254,7 @@ const HomePage = ({ currentPage }) => {
                                     </p>
                                   )}
                                 </div>
-                                <div className="text-sm text-blue-800 mt-2 overflow-hidden">
+                                <div className="text-sm text-blue-800 mt-2">
                                   <div
                                     dangerouslySetInnerHTML={{
                                       __html: truncate(sub.content, 100),
