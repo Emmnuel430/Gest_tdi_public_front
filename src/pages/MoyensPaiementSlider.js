@@ -66,13 +66,13 @@ const MoyensPaiementSlider = () => {
           >
             {subsections.map((sub) => (
               <SwiperSlide key={sub.id}>
-                <div className="bg-white rounded-xl shadow-md h-[280px] overflow-hidden flex flex-col">
-                  <div className="h-28 w-full overflow-hidden">
+                <div className="bg-white rounded-xl shadow-md h-[230px] overflow-hidden flex flex-col">
+                  <div className="h-[50%] w-full overflow-hidden">
                     {sub.image ? (
                       <img
                         src={`${STORAGE}/${sub.image}`}
                         alt={sub.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain rounded-t-xl"
                       />
                     ) : (
                       <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">

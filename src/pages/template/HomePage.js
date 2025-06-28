@@ -222,21 +222,24 @@ const HomePage = ({ currentPage }) => {
                           .map((sub) => (
                             <div
                               key={sub.id}
-                              className="bg-white rounded-xl shadow-md flex flex-col h-[300px] overflow-hidden"
+                              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden h-[300px]"
                             >
-                              <div className="h-[50%] w-full overflow-hidden">
+                              {/* Image adaptative */}
+                              <div className="w-full max-h-[150px] flex items-center justify-center bg-white">
                                 {sub.image ? (
                                   <img
                                     src={`${STORAGE}/${sub.image}`}
                                     alt={sub.title}
-                                    className="w-full h-full object-contain rounded-t-xl"
+                                    className="max-h-[140px] object-contain"
                                   />
                                 ) : (
-                                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">
+                                  <div className="w-full h-[120px] bg-blue-100 flex items-center justify-center text-blue-400">
                                     <i className="fas fa-image fa-lg"></i>
                                   </div>
                                 )}
                               </div>
+
+                              {/* Texte */}
                               <div className="p-3 flex flex-col justify-between flex-grow">
                                 <div>
                                   <h5 className="text-md font-semibold text-blue-900">
