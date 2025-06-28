@@ -222,15 +222,15 @@ const HomePage = ({ currentPage }) => {
                           .map((sub) => (
                             <div
                               key={sub.id}
-                              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden h-[300px]"
+                              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden max-h-[400px]"
                             >
                               {/* Image adaptative */}
-                              <div className="w-full max-h-[150px] flex items-center justify-center bg-white">
+                              <div className="w-full h-[50%] flex items-center justify-center bg-white">
                                 {sub.image ? (
                                   <img
                                     src={`${STORAGE}/${sub.image}`}
                                     alt={sub.title}
-                                    className="max-h-[140px] object-contain"
+                                    className="h-full object-contain"
                                   />
                                 ) : (
                                   <div className="w-full h-[120px] bg-blue-100 flex items-center justify-center text-blue-400">
@@ -240,7 +240,7 @@ const HomePage = ({ currentPage }) => {
                               </div>
 
                               {/* Texte */}
-                              <div className="p-3 flex flex-col justify-between flex-grow">
+                              <div className="p-3 flex flex-col justify-between flex-grow min-h-[200px]">
                                 <div>
                                   <h5 className="text-md font-semibold text-blue-900">
                                     {sub.title}
