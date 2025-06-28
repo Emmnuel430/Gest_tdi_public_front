@@ -71,13 +71,13 @@ function LayoutPublic({ children }) {
 
               <Link
                 to="/prayers-request"
-                className={`block text-center font-semibold px-6 py-5 rounded-xl text-white text-lg transition duration-300 ${
+                className={`block text-center font-semibold lg:text-lg text-sm lg:px-6 px-4 lg:py-5 py-3 rounded-xl text-white transition duration-300 ${
                   location.pathname === "/prayers-request"
                     ? "bg-yellow-600 shadow-lg"
                     : "bg-yellow-800 hover:bg-yellow-600 hover:shadow-md"
                 }`}
               >
-                Demande de prière
+                Demande de <br /> prière
               </Link>
             </div>
             {/* Bouton hamburger */}
