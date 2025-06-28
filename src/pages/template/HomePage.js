@@ -222,7 +222,7 @@ const HomePage = ({ currentPage }) => {
                           .map((sub) => (
                             <div
                               key={sub.id}
-                              className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden max-h-[400px]"
+                              className="bg-white rounded-xl shadow-md flex flex-col"
                             >
                               {/* Image adaptative */}
                               <div className="w-full h-[50%] flex items-center justify-center bg-white">
@@ -240,7 +240,7 @@ const HomePage = ({ currentPage }) => {
                               </div>
 
                               {/* Texte */}
-                              <div className="p-3 flex flex-col justify-between flex-grow min-h-[200px]">
+                              <div className="p-3 flex flex-col justify-between flex-grow max-h-[220px]">
                                 <div>
                                   <h5 className="text-md font-semibold text-blue-900">
                                     {sub.title}
@@ -264,7 +264,7 @@ const HomePage = ({ currentPage }) => {
                                     .length > 100 && (
                                     <Link
                                       to={`/subsection/${sub.id}`}
-                                      className="text-blue-600 hover:underline text-xs mt-2 inline-block"
+                                      className="border border-blue-600 p-2 text-blue-600 hover:underline text-xs mt-2 inline-block"
                                     >
                                       Lire plus →
                                     </Link>
