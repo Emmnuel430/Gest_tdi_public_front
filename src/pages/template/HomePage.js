@@ -217,57 +217,59 @@ const HomePage = ({ currentPage }) => {
                     ) : (
                       // 🧱 Grille classique pour les autres sections
                       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {section.subsections.map((sub) => (
-                          <div
-                            key={sub.id}
-                            className="bg-white rounded-xl shadow-md flex flex-col h-[280px] overflow-hidden"
-                          >
-                            <div className="h-28 w-full overflow-hidden">
-                              {sub.image ? (
-                                <img
-                                  src={`${STORAGE}/${sub.image}`}
-                                  alt={sub.title}
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">
-                                  <i className="fas fa-image fa-lg"></i>
+                        {section.subsections
+                          .slice(0, 3) // Limite à 3 sous-sections
+                          .map((sub) => (
+                            <div
+                              key={sub.id}
+                              className="bg-white rounded-xl shadow-md flex flex-col h-[300px] overflow-hidden"
+                            >
+                              <div className="h-[50%] w-full overflow-hidden">
+                                {sub.image ? (
+                                  <img
+                                    src={`${STORAGE}/${sub.image}`}
+                                    alt={sub.title}
+                                    className="w-full h-full object-contain rounded-t-xl"
+                                  />
+                                ) : (
+                                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-blue-400">
+                                    <i className="fas fa-image fa-lg"></i>
+                                  </div>
+                                )}
+                              </div>
+                              <div className="p-3 flex flex-col justify-between flex-grow">
+                                <div>
+                                  <h5 className="text-md font-semibold text-blue-900">
+                                    {sub.title}
+                                  </h5>
+                                  {(sub.date || sub.prix) && (
+                                    <p className="text-sm text-blue-700 mb-2">
+                                      {sub.date &&
+                                        new Date(sub.date).toLocaleDateString()}
+                                      {sub.date && sub.prix && " · "}
+                                      {sub.prix && `${sub.prix} €`}
+                                    </p>
+                                  )}
                                 </div>
-                              )}
-                            </div>
-                            <div className="p-3 flex flex-col justify-between flex-grow">
-                              <div>
-                                <h5 className="text-md font-semibold text-blue-900">
-                                  {sub.title}
-                                </h5>
-                                {(sub.date || sub.prix) && (
-                                  <p className="text-sm text-blue-700 mb-2">
-                                    {sub.date &&
-                                      new Date(sub.date).toLocaleDateString()}
-                                    {sub.date && sub.prix && " · "}
-                                    {sub.prix && `${sub.prix} €`}
-                                  </p>
-                                )}
-                              </div>
-                              <div className="text-sm text-blue-800 mt-2 overflow-hidden">
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: truncate(sub.content, 100),
-                                  }}
-                                />
-                                {sub.content.replace(/<[^>]*>?/gm, "").length >
-                                  100 && (
-                                  <Link
-                                    to={`/subsection/${sub.id}`}
-                                    className="text-blue-600 hover:underline text-xs mt-2 inline-block"
-                                  >
-                                    Lire plus →
-                                  </Link>
-                                )}
+                                <div className="text-sm text-blue-800 mt-2 overflow-hidden">
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: truncate(sub.content, 100),
+                                    }}
+                                  />
+                                  {sub.content.replace(/<[^>]*>?/gm, "")
+                                    .length > 100 && (
+                                    <Link
+                                      to={`/subsection/${sub.id}`}
+                                      className="text-blue-600 hover:underline text-xs mt-2 inline-block"
+                                    >
+                                      Lire plus →
+                                    </Link>
+                                  )}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
                       </div>
                     ))}
                 </div>
