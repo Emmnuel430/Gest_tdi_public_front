@@ -222,7 +222,7 @@ const HomePage = ({ currentPage }) => {
                           .map((sub) => (
                             <div
                               key={sub.id}
-                              className="bg-white rounded-xl shadow-md flex flex-col"
+                              className="bg-white rounded-xl shadow-md flex flex-col justify-between"
                             >
                               {/* Image adaptative */}
                               <div className="w-full h-[50%] flex items-center justify-center bg-white">
@@ -264,7 +264,7 @@ const HomePage = ({ currentPage }) => {
                                     .length > 100 && (
                                     <Link
                                       to={`/subsection/${sub.id}`}
-                                      className="border border-blue-600 p-2 text-blue-600 hover:underline text-xs mt-2 inline-block"
+                                      className="border border-blue-600 rounded-2 p-2 text-blue-600 hover:underline text-xs mt-2 inline-block"
                                     >
                                       Lire plus →
                                     </Link>
