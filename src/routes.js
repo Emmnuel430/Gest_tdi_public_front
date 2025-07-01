@@ -7,10 +7,12 @@ import DynamicPage from "./pages/template/DynamicPage";
 import SubsectionDetail from "./pages/SubsectionDetail";
 import NotFound from "./pages/NotFound";
 import PrayersRequests from "./pages/forms/PrayersRequests";
+import ScrollToTop from "./components/ScrollToTop";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<DynamicPage key="accueil" />} />
         <Route path="/subsection/:id" element={<SubsectionDetail />} />

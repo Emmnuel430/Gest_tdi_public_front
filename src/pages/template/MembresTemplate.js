@@ -115,7 +115,10 @@ const MembresTemplate = ({ page }) => {
             )}
         </section>
       )}
-
+      {/* Formulaire d'adhésion */}
+      <section className="my-12 px-4">
+        <AdhesionForm />
+      </section>
       <hr className="my-2 border-t border-gray-300" />
 
       {/* Section 2 : Fiche d’adhésion */}
@@ -137,10 +140,7 @@ const MembresTemplate = ({ page }) => {
           </a>
         </section>
       )}
-      {/* Formulaire d'adhésion */}
-      <section className="my-12 px-4">
-        <AdhesionForm />
-      </section>
+
       {/* Autres sections (avec sous-sections) */}
       {otherSections.length > 0 && (
         <div className="mt-16 px-4">

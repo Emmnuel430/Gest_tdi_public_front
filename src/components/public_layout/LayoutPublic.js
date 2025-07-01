@@ -26,10 +26,7 @@ function LayoutPublic({ children }) {
     fetch(`${API}/ads`)
       .then((res) => res.json())
       .then((data) => {
-        const lastTwoActives = data
-          .filter((ad) => ad.actif === 1)
-          .reverse()
-          .slice(0, 2);
+        const lastTwoActives = data.filter((ad) => ad.actif === 1).reverse();
         setAds(lastTwoActives);
       });
   }, []);

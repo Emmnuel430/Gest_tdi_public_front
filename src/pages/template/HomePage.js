@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LayoutPublic from "../../components/public_layout/LayoutPublic";
 // import Loader from "../../components/Layout/Loader";
-import truncate from "html-truncate";
+// import truncate from "html-truncate";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -39,6 +39,32 @@ const HomePage = ({ currentPage }) => {
     return match
       ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`
       : null;
+  };
+
+  const htmlToTextWithLineBreaks = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+
+    // Ajoute des retours à la ligne après certains blocs
+    const blockTags = ["P", "BR", "DIV", "LI", "H1", "H2", "H3", "H4"];
+    blockTags.forEach((tag) => {
+      const elements = div.getElementsByTagName(tag);
+      for (let el of elements) {
+        if (el.nextSibling) {
+          el.insertAdjacentText("afterend", "\n");
+        }
+      }
+    });
+
+    const text = div.textContent || div.innerText || "";
+    return text.replace(/\n{2,}/g, "\n").trim(); // nettoie les multiples \n
+  };
+
+  const getPreview = (html, maxLength = 150) => {
+    const plainText = htmlToTextWithLineBreaks(html);
+    return plainText.length > maxLength
+      ? plainText.slice(0, maxLength) + "..."
+      : plainText;
   };
 
   return (
@@ -254,22 +280,21 @@ const HomePage = ({ currentPage }) => {
                                     </p>
                                   )}
                                 </div>
-                                <div className="text-sm text-blue-800 mt-2">
-                                  <div
-                                    dangerouslySetInnerHTML={{
-                                      __html: truncate(sub.content, 100),
-                                    }}
-                                  />
-                                  {sub.content.replace(/<[^>]*>?/gm, "")
-                                    .length > 100 && (
-                                    <Link
-                                      to={`/subsection/${sub.id}`}
-                                      className="border border-blue-600 rounded-2 p-2 text-blue-600 hover:underline text-xs mt-2 inline-block"
-                                    >
-                                      Lire plus →
-                                    </Link>
-                                  )}
-                                </div>
+                                {sub.content && (
+                                  <div className="text-sm text-blue-800 whitespace-pre-line flex-grow flex flex-col justify-between">
+                                    <div>{getPreview(sub.content, 150)}</div>
+
+                                    {htmlToTextWithLineBreaks(sub.content)
+                                      .length > 150 && (
+                                      <Link
+                                        to={`/subsection/${sub.id}`}
+                                        className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                                      >
+                                        Lire plus →
+                                      </Link>
+                                    )}
+                                  </div>
+                                )}
                               </div>
                             </div>
                           ))}

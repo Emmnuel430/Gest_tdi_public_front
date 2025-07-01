@@ -2,7 +2,7 @@ import React from "react";
 import LayoutPublic from "../../components/public_layout/LayoutPublic";
 import Loader from "../../components/Layout/Loader";
 import { Link } from "react-router-dom";
-import truncate from "html-truncate";
+// import truncate from "html-truncate";
 
 const StandardPage = ({ page }) => {
   const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
@@ -14,6 +14,32 @@ const StandardPage = ({ page }) => {
       </div>
     );
   }
+
+  const htmlToTextWithLineBreaks = (html) => {
+    const div = document.createElement("div");
+    div.innerHTML = html;
+
+    // Ajoute des retours à la ligne après certains blocs
+    const blockTags = ["P", "BR", "DIV", "LI", "H1", "H2", "H3", "H4"];
+    blockTags.forEach((tag) => {
+      const elements = div.getElementsByTagName(tag);
+      for (let el of elements) {
+        if (el.nextSibling) {
+          el.insertAdjacentText("afterend", "\n");
+        }
+      }
+    });
+
+    const text = div.textContent || div.innerText || "";
+    return text.replace(/\n{2,}/g, "\n").trim(); // nettoie les multiples \n
+  };
+
+  const getPreview = (html, maxLength = 150) => {
+    const plainText = htmlToTextWithLineBreaks(html);
+    return plainText.length > maxLength
+      ? plainText.slice(0, maxLength) + "..."
+      : plainText;
+  };
 
   return (
     <LayoutPublic>
@@ -114,22 +140,18 @@ const StandardPage = ({ page }) => {
 
                       {/* Contenu HTML */}
                       {sub.content && (
-                        <div className="text-sm text-blue-800 flex-grow flex flex-col justify-between">
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: truncate(sub.content, 150),
-                            }}
-                          />
-                          {sub.content &&
-                            sub.content.replace(/<[^>]*>?/gm, "").length >
-                              150 && (
-                              <Link
-                                to={`/subsection/${sub.id}`}
-                                className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
-                              >
-                                Lire plus →
-                              </Link>
-                            )}
+                        <div className="text-sm text-blue-800 whitespace-pre-line flex-grow flex flex-col justify-between">
+                          <div>{getPreview(sub.content, 150)}</div>
+
+                          {htmlToTextWithLineBreaks(sub.content).length >
+                            150 && (
+                            <Link
+                              to={`/subsection/${sub.id}`}
+                              className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                            >
+                              Lire plus →
+                            </Link>
+                          )}
                         </div>
                       )}
                     </div>
