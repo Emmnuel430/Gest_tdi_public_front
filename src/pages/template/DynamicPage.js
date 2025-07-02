@@ -7,6 +7,7 @@ import ShopPage from "./ShopPage";
 import Dons from "./Dons";
 import NotFound from "../NotFound"; // ⬅️ Le composant 404
 import MembresTemplate from "./MembresTemplate";
+import ParachiotPage from "./ParachiotPage";
 
 export default function DynamicPage() {
   const { slug } = useParams();
@@ -26,7 +27,18 @@ export default function DynamicPage() {
         return res.json();
       })
       .then((data) => {
-        if (data) setPage(data);
+        if (data) {
+          // Si c’est la page d'accueil, on enlève la section d'ordre 7
+          if (slugToUse === "accueil") {
+            const sectionsSans7 = data.sections.filter(
+              (section) => section.order !== 7
+            );
+            setPage({ ...data, sections: sectionsSans7 });
+          } else {
+            setPage(data);
+          }
+        }
+        console.log(data);
       })
       .catch((error) => {
         console.error("Erreur de chargement :", error);
@@ -48,13 +60,15 @@ export default function DynamicPage() {
 
   switch (page.template) {
     case "accueil":
-      return <HomePage currentPage={page} />;
+      return <HomePage page={page} />;
     case "boutique":
       return <ShopPage page={page} />;
     case "membres":
       return <MembresTemplate page={page} />;
     case "dons":
       return <Dons page={page} />;
+    case "parachiot":
+      return <ParachiotPage page={page} />;
     default:
       return <StandardPage page={page} />;
   }

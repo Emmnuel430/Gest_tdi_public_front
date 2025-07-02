@@ -71,7 +71,7 @@ function LayoutPublic({ children }) {
                 className={`block text-center font-semibold lg:text-lg text-sm lg:px-6 px-4 lg:py-5 py-3 rounded-xl text-white transition duration-300 ${
                   location.pathname === "/prayers-request"
                     ? "bg-yellow-600 shadow-lg"
-                    : "bg-yellow-800 hover:bg-yellow-600 hover:shadow-md"
+                    : "bg-yellow-500 hover:bg-yellow-600 hover:shadow-md"
                 }`}
               >
                 Demande de <br /> prière
@@ -125,7 +125,7 @@ function LayoutPublic({ children }) {
       </header>
 
       {/* -------------------------------- */}
-      <div className="mt-[9rem] lg:mt-[16.6rem] min-h-screen">{children}</div>
+      <div className="mt-[8.5rem] lg:mt-[16.4rem] min-h-screen">{children}</div>
       {/* -------------------------------- */}
 
       <footer

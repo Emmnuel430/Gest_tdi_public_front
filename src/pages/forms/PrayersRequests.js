@@ -76,16 +76,14 @@ const PrayersRequests = () => {
 
   return (
     <LayoutPublic>
-      <section className="bg-blue-100 h-[40vh] flex items-center justify-center">
-        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg text-center">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2">
-            Demande de prière
+      <section className="bg-[#b097c6] h-[45vh] flex items-center justify-center">
+        <div className="max-w-3xl bg-white/80 p-8 rounded-lg shadow-lg text-center">
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">
+            Demande de prière et de Bénédictions
           </h1>
           <p className="text-blue-800">
-            Remplissez ce formulaire pour envoyer votre demande de prière.{" "}
-            <br />
-            Veuillez joindre la <strong>preuve de votre don</strong> pour que
-            nous puissions traiter votre demande.
+            Remplissez le formulaire ci-dessous pour envoyer votre Demande de
+            Prières et de Bénédictions
           </p>
         </div>
       </section>
