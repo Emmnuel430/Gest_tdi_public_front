@@ -157,9 +157,32 @@ function LayoutPublic({ children }) {
 
         {/* Réseaux sociaux */}
         <div className="my-10 flex justify-center space-x-4 text-2xl text-blue-800">
-          <i className="ri-facebook-fill hover:text-yellow-600 cursor-pointer"></i>
-          <i className="ri-instagram-line hover:text-yellow-600 cursor-pointer"></i>
-          <i className="ri-youtube-fill hover:text-yellow-600 cursor-pointer"></i>
+          <a
+            href="https://www.facebook.com/Rabbihoremeliekoutouan"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-600"
+          >
+            <i className="ri-facebook-fill cursor-pointer"></i>
+          </a>
+
+          {/* <a
+    href="https://www.instagram.com/ton-profil"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-yellow-600"
+  >
+    <i className="ri-instagram-line cursor-pointer"></i>
+  </a>
+
+  <a
+    href="https://www.youtube.com/@ton-chaine"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-yellow-600"
+  >
+    <i className="ri-youtube-fill cursor-pointer"></i>
+  </a> */}
         </div>
 
         {/* Contenu principal */}
