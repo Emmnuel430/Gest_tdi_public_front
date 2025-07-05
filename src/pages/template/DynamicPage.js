@@ -38,7 +38,7 @@ export default function DynamicPage() {
             setPage(data);
           }
         }
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => {
         console.error("Erreur de chargement :", error);
