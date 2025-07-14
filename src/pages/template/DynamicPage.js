@@ -13,8 +13,10 @@ export default function DynamicPage() {
   const { slug } = useParams();
   const [page, setPage] = useState(null);
   const [notFound, setNotFound] = useState(false); // ⬅️ Pour gérer la 404
+  const [loading, setLoading] = useState(true); // ⬅️ Ajout de l'état loading
 
   useEffect(() => {
+    setLoading(true);
     const LINK = process.env.REACT_APP_API_URL;
     const slugToUse = slug || "accueil";
 
@@ -22,6 +24,7 @@ export default function DynamicPage() {
       .then((res) => {
         if (!res.ok) {
           setNotFound(true); // ⬅️ Activer la 404
+          setLoading(false);
           return null;
         }
         return res.json();
@@ -38,11 +41,13 @@ export default function DynamicPage() {
             setPage(data);
           }
         }
+        setLoading(false);
         // console.log(data);
       })
       .catch((error) => {
         console.error("Erreur de chargement :", error);
         setNotFound(true);
+        setLoading(false);
       });
   }, [slug]);
 
@@ -50,7 +55,7 @@ export default function DynamicPage() {
     return <NotFound />;
   }
 
-  if (!page) {
+  if (loading) {
     return (
       <div className="h-screen flex items-center justify-center">
         <Loader />

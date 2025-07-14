@@ -139,13 +139,14 @@ const HomePage = ({ page }) => {
                     {section.subsections.slice(0, 6).map((sub) => (
                       <div
                         key={sub.id}
-                        className="bg-white rounded-xl shadow-md flex flex-col justify-between h-[300px] overflow-hidden"
+                        className="bg-white rounded-2xl shadow hover:shadow-lg transition p-2 flex flex-col overflow-hidden"
                       >
                         {/* Image sous-section */}
                         <div className="w-full h-[120px] flex items-center justify-center bg-white">
                           {sub.image ? (
                             <img
                               src={`${STORAGE}/${sub.image}`}
+                              // src="/404-error.png"
                               alt={sub.title}
                               className="h-full object-contain"
                             />

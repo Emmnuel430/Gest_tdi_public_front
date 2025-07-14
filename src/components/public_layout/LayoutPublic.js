@@ -91,7 +91,7 @@ function LayoutPublic({ children }) {
           {/* Ligne 2 : Menu */}
           <div
             className={`absolute left-0 w-full bg-blue-950/80 backdrop-blur-sm duration-300 z-40  ${
-              menuOpen ? "top-0 h-[100vh]" : "top-[-120vh]"
+              menuOpen ? "top-0 h-[100vh]" : "top-[-999vh]"
             } overflow-y-auto lg:static lg:bg-transparent lg:backdrop-blur-0 lg:top-auto lg:h-auto lg:overflow-visible`}
           >
             <ul
