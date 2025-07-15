@@ -2,11 +2,11 @@ import React from "react";
 import LayoutPublic from "../../components/public_layout/LayoutPublic";
 
 const Dons = ({ page }) => {
-  const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
+  // const STORAGE = process.env.REACT_APP_API_BASE_URL_STORAGE;
   return (
     <LayoutPublic>
       {/* En-tête */}
-      <section
+      {/* <section
         className={`${
           page.main_image ? "" : "bg-blue-100"
         } h-[50vh] bg-cover bg-center flex items-center justify-center`}
@@ -28,7 +28,7 @@ const Dons = ({ page }) => {
             <p className="text-lg text-blue-800">{page.subtitle}</p>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* Contenu dons */}
       <section className="container mx-auto px-4 py-12">

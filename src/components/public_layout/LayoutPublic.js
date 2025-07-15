@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/img/logo.png"; // Mets ici ton chemin correct vers le logo
 import floral from "../../assets/img/floral-1.png"; // Mets ici ton chemin correct vers le logo
 import { Link, useLocation } from "react-router-dom";
@@ -7,7 +7,23 @@ import UseNavbarInteractions from "../../assets/js/UseNavbarInteractions";
 
 const email = process.env.REACT_APP_EMAIL;
 const adresse = process.env.REACT_APP_ADRESSE;
-const telephone = process.env.REACT_APP_TELEPHONE;
+// const telephone = process.env.REACT_APP_TELEPHONE;
+
+const contacts = [
+  {
+    label: "Ligne directe du secrétariat",
+    numeros: ["27 22 31 52 09", "05 04 41 73 83"],
+  },
+  {
+    label: "Bureau du comité exécutif",
+    numeros: [
+      "27 35 97 42 06",
+      "07 09 42 45 69",
+      "01 03 14 49 82",
+      "01 01 04 78 24",
+    ],
+  },
+];
 
 function LayoutPublic({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -129,7 +145,7 @@ function LayoutPublic({ children }) {
       {/* -------------------------------- */}
 
       <footer
-        className={`bg-yellow-50 text-blue-950 mt-10 md:mt-0 pb-10
+        className={`bg-blue-950 text-white mt-10 md:mt-0 pb-10
         ${location.pathname === "/" ? "pt-20 " : "pt-5"} 
         relative`}
       >
@@ -156,7 +172,7 @@ function LayoutPublic({ children }) {
         )}
 
         {/* Réseaux sociaux */}
-        <div className="my-10 flex justify-center space-x-4 text-2xl text-blue-800">
+        <div className="my-10 flex justify-center space-x-4 text-3xl text-white">
           <a
             href="https://www.facebook.com/Rabbihoremeliekoutouan"
             target="_blank"
@@ -166,29 +182,29 @@ function LayoutPublic({ children }) {
             <i className="ri-facebook-fill cursor-pointer"></i>
           </a>
 
-          {/* <a
-    href="https://www.instagram.com/ton-profil"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="hover:text-yellow-600"
-  >
-    <i className="ri-instagram-line cursor-pointer"></i>
-  </a>
+          <a
+            href="https://www.instagram.com/?next=%2Freel%2FDK6yuZtsCal%2F"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-600"
+          >
+            <i className="ri-instagram-line cursor-pointer"></i>
+          </a>
 
-  <a
-    href="https://www.youtube.com/@ton-chaine"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="hover:text-yellow-600"
-  >
-    <i className="ri-youtube-fill cursor-pointer"></i>
-  </a> */}
+          <a
+            href="https://www.youtube.com/@Torah-DiffusionInternationale/featured"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-yellow-600"
+          >
+            <i className="ri-youtube-fill cursor-pointer"></i>
+          </a>
         </div>
 
         {/* Contenu principal */}
-        <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center md:text-left">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row gap-10 text-center md:text-left justify-around">
           {/* Logo */}
-          <div>
+          <div className="w-full md:w-1/3">
             <img src={logo} alt="logo" className="mx-auto md:mx-0 w-40 h-40" />
             <p className="mt-4 text-sm opacity-70">
               Une communauté unie par l'Etude de la Torah, par le Service Divin
@@ -197,7 +213,7 @@ function LayoutPublic({ children }) {
           </div>
 
           {/* Liens utiles */}
-          <div>
+          {/* <div>
             <h4 className="mb-4 font-bold text-lg">Navigation</h4>
             <ul className="space-y-2">
               {links.map((link) => (
@@ -206,17 +222,34 @@ function LayoutPublic({ children }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Ressources */}
 
           {/* Contact */}
           <div>
             <h4 className="mb-4 font-bold text-lg">Contact</h4>
-            <ul className="space-y-1 text-sm">
+            <ul className="space-y-2 text-sm">
               <li>📧 {email}</li>
               <li>📍 {adresse}</li>
-              <li>📞 {telephone}</li>
+
+              {contacts.map((group, idx) => (
+                <React.Fragment key={idx}>
+                  <li className="mt-2 font-semibold text-white">
+                    📞 {group.label}
+                  </li>
+                  {group.numeros.map((numero, i) => (
+                    <li key={i} className="pl-4">
+                      <a
+                        href={`tel:+225${numero.replace(/\s/g, "")}`}
+                        className="hover:text-gray-500 text-white"
+                      >
+                        +225 {numero}
+                      </a>
+                    </li>
+                  ))}
+                </React.Fragment>
+              ))}
             </ul>
           </div>
         </div>

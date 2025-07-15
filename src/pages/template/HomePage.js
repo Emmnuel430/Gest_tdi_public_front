@@ -183,7 +183,7 @@ const HomePage = ({ page }) => {
                                 100 && (
                                 <Link
                                   to={`/subsection/${sub.id}`}
-                                  className="text-blue-600 hover:underline text-xs mt-2 inline-block p-2 border border-blue-600"
+                                  className="text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                                 >
                                   Lire plus →
                                 </Link>

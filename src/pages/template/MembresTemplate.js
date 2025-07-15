@@ -23,7 +23,7 @@ const MembresTemplate = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête de page */}
-      <section
+      {/* <section
         className={`${
           page.main_image ? "" : "bg-blue-100"
         } h-[50vh] bg-cover bg-center flex items-center justify-center`}
@@ -45,7 +45,7 @@ const MembresTemplate = ({ page }) => {
             <p className="text-lg text-blue-800">{page.subtitle}</p>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* Section 1 : La Charte */}
       {sectionCharte && (
@@ -102,7 +102,7 @@ const MembresTemplate = ({ page }) => {
                             150 && (
                             <Link
                               to={`/subsection/${sub.id}`}
-                              className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                              className="text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                             >
                               Lire plus →
                             </Link>

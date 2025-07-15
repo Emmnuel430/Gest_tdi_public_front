@@ -108,7 +108,7 @@ const ShopPage = ({ page }) => {
                 <div
                   key={produit.id}
                   onClick={() => toggleSelection(produit)}
-                  className={`cursor-pointer bg-blue-50 p-4 rounded-xl shadow transition hover:shadow-md border-2 ${
+                  className={`cursor-pointer bg-blue-50 p-4 rounded-xl shadow transition hover:shadow-md border-2 flex flex-col ${
                     isSelected ? "border-blue-600" : "border-transparent"
                   }`}
                 >
@@ -139,7 +139,7 @@ const ShopPage = ({ page }) => {
                           150 && (
                           <Link
                             to={`/subsection/${produit.id}`}
-                            className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                            className="w-fit mx-auto text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                           >
                             Lire plus →
                           </Link>

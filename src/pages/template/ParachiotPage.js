@@ -50,7 +50,7 @@ const ParachiotPage = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête de page */}
-      <section
+      {/* <section
         className={`${
           page.main_image ? "" : "bg-blue-100"
         }h-[50vh] bg-cover bg-center flex items-center justify-center`}
@@ -75,14 +75,14 @@ const ParachiotPage = ({ page }) => {
             <p className="text-lg text-blue-800">{page.subtitle}</p>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* Sections dynamiques */}
       <section className="px-4 md:px-16 bg-white pb-20">
         {lastSection && (
           <div
             key={lastSection.id}
-            className="bg-yellow-50 p-6 rounded-2xl shadow hover:shadow-md transition"
+            className="bg-blue-950 p-6 rounded-2xl shadow hover:shadow-md transition mb-10"
           >
             {/* Image + Texte Section principale */}
             <div className="flex flex-col lg:flex-row items-center gap-6">
@@ -97,11 +97,11 @@ const ParachiotPage = ({ page }) => {
               )}
 
               <div className="w-full lg:w-1/2 text-center lg:text-left">
-                <h2 className="text-3xl font-extrabold text-2xl text-yellow-900 mb-2">
+                <h2 className="text-3xl font-extrabold text-2xl text-white mb-2">
                   {lastSection.title}
                 </h2>
                 {lastSection.subtitle && (
-                  <p className="text-yellow-800 text-sm">
+                  <p className="text-gray-500 text-sm">
                     {lastSection.subtitle}
                   </p>
                 )}
@@ -124,12 +124,12 @@ const ParachiotPage = ({ page }) => {
                       />
                     )}
                     {sub.title && (
-                      <h3 className="text-lg font-semibold text-yellow-900 mb-1">
+                      <h3 className="text-lg font-semibold text-blue-900 mb-1">
                         {sub.title}
                       </h3>
                     )}
                     {(sub.date || sub.prix) && (
-                      <p className="text-sm text-yellow-700 mb-2">
+                      <p className="text-sm text-blue-700 mb-2">
                         {sub.date && (
                           <span>{new Date(sub.date).toLocaleDateString()}</span>
                         )}
@@ -138,12 +138,12 @@ const ParachiotPage = ({ page }) => {
                       </p>
                     )}
                     {sub.content && (
-                      <div className="text-sm text-yellow-800 whitespace-pre-line flex-grow flex flex-col justify-between">
+                      <div className="text-sm text-blue-800 whitespace-pre-line flex-grow flex flex-col justify-between">
                         <div>{getPreview(sub.content, 150)}</div>
                         {htmlToTextWithLineBreaks(sub.content).length > 150 && (
                           <Link
                             to={`/subsection/${sub.id}`}
-                            className="text-yellow-600 hover:underline border p-2 inline-block mt-2 w-max"
+                            className="w-fit mx-auto text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                           >
                             Lire plus →
                           </Link>
@@ -156,12 +156,12 @@ const ParachiotPage = ({ page }) => {
             )}
           </div>
         )}
-
+        <hr />
         {/* Les autres sections normales */}
         {otherSections.map((section) => (
           <div
             key={section.id}
-            className="bg-blue-50 p-6 rounded-2xl shadow hover:shadow-md transition"
+            className="mt-10 bg-blue-50 p-6 rounded-2xl shadow hover:shadow-md transition"
           >
             {/* ... le même rendu que tu as déjà ... */}
             <div className="flex flex-col lg:flex-row items-center gap-6">
@@ -219,7 +219,7 @@ const ParachiotPage = ({ page }) => {
                         {htmlToTextWithLineBreaks(sub.content).length > 150 && (
                           <Link
                             to={`/subsection/${sub.id}`}
-                            className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                            className="w-fit mx-auto text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                           >
                             Lire plus →
                           </Link>

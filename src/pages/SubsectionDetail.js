@@ -27,6 +27,29 @@ export default function SubsectionDetail() {
       });
   }, [id, LINK]);
 
+  const cleanHTML = (html) => {
+    return (
+      html
+        // 1. Règle : <p><br /></p> → 2 <br />
+        .replace(/<p>\s*<br\s*\/?>\s*<\/p>/gi, "<br /><br />")
+
+        // 2. Règle : paragraphes vides → 1 <br />
+        .replace(/<p>(\s|&nbsp;)*<\/p>/gi, "<br />")
+
+        // 3. Règle : <li> vide → &nbsp; (pour forcer le marker)
+        .replace(/<li>(\s|&nbsp;)*<\/li>/gi, "<li>&nbsp;</li>")
+
+        // 4. Ajouter un style inline de margin-bottom à tous les <p> restants
+        .replace(/<p(?![^>]*style=)/gi, '<p style="margin-bottom: 1rem"')
+        // Si certains <p> ont déjà un style, on l’ajoute proprement
+        .replace(/<p style="([^"]*)"/gi, (match, styles) => {
+          // évite de doubler le margin-bottom si déjà présent
+          if (styles.includes("margin-bottom")) return match;
+          return `<p style="${styles}; margin-bottom: 1rem"`;
+        })
+    );
+  };
+
   return (
     <LayoutPublic>
       {loading ? (
@@ -64,7 +87,9 @@ export default function SubsectionDetail() {
             {/* Contenu HTML */}
             <div
               className="prose prose-lg max-w-none text-gray-700"
-              dangerouslySetInnerHTML={{ __html: sub.content }}
+              dangerouslySetInnerHTML={{
+                __html: sub.content ? cleanHTML(sub.content) : "",
+              }}
             />
           </div>
         </>

@@ -44,32 +44,14 @@ const StandardPage = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête de page */}
-      <section
-        className={`${
-          page.main_image ? "" : "bg-blue-100"
-        }h-[50vh] bg-cover bg-center flex items-center justify-center`}
-        style={
-          page.main_image
-            ? {
-                backgroundImage: `url(${STORAGE}/${page.main_image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }
-            : {
-                backgroundColor: "#f0f9ff", // Couleur de fond si pas d'image
-                backgroundSize: "cover",
-              }
-        }
-      >
-        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-            {page.title}
-          </h1>
-          {page.subtitle && (
-            <p className="text-lg text-blue-800">{page.subtitle}</p>
-          )}
-        </div>
-      </section>
+      {/* <div className="pt-10 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+          {page.title}
+        </h1>
+        {page.subtitle && (
+          <p className="text-lg text-blue-800">{page.subtitle}</p>
+        )}
+      </div> */}
 
       {/* Sections dynamiques */}
       <section className="px-4 md:px-16 bg-white pb-20">
@@ -147,7 +129,7 @@ const StandardPage = ({ page }) => {
                             150 && (
                             <Link
                               to={`/subsection/${sub.id}`}
-                              className="text-blue-600 hover:underline border p-2 inline-block mt-2 w-max"
+                              className="w-fit mx-auto text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
                             >
                               Lire plus →
                             </Link>

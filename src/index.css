@@ -20,6 +20,22 @@ body {
   color: #eab308; /* text-yellow-500 */
 }
 
+.prose li {
+  min-height: 1em; /* ou padding ou autre pour forcer le rendu */
+  padding-left: 1em;
+}
+
+.prose li::marker {
+  content: " ●";
+  font-size: 1.2em;
+  color: inherit;
+}
+
+.prose a {
+  color: #2b7fff;
+  text-decoration: underline !important;
+}
+
 section {
   padding: 0;
   padding-top: 4rem !important;
