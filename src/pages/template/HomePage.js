@@ -136,7 +136,7 @@ const HomePage = ({ page }) => {
                 {/* Sous-sections */}
                 {section.subsections.length > 0 && (
                   <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                    {section.subsections.slice(0, 6).map((sub) => (
+                    {section.subsections.map((sub) => (
                       <div
                         key={sub.id}
                         className="bg-white rounded-2xl shadow hover:shadow-lg transition p-2 flex flex-col overflow-hidden"

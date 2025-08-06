@@ -59,7 +59,7 @@ const StandardPage = ({ page }) => {
           {page.sections.map((section) => (
             <div
               key={section.id}
-              className="bg-blue-50 p-6 rounded-2xl shadow hover:shadow-md transition"
+              className="bg-blue-950 p-6 rounded-2xl shadow hover:shadow-md transition"
             >
               {/* Image + Texte Section principale */}
               <div className="flex flex-col lg:flex-row items-center gap-6">
@@ -74,11 +74,11 @@ const StandardPage = ({ page }) => {
                 )}
 
                 <div className="w-full lg:w-2/3 text-center lg:text-left">
-                  <h2 className="text-2xl font-bold text-blue-900 mb-2">
+                  <h2 className="text-2xl font-bold text-white mb-2">
                     {section.title}
                   </h2>
                   {section.subtitle && (
-                    <p className="text-gray-700 text-sm">{section.subtitle}</p>
+                    <p className="text-gray-200 text-sm">{section.subtitle}</p>
                   )}
                 </div>
               </div>

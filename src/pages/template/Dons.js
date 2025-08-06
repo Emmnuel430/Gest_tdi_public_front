@@ -41,7 +41,7 @@ const Dons = ({ page }) => {
             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
               {section.subsections.map((sub, index) => (
                 <div
-                  key={sub.id}
+                  key={index}
                   className="w-full max-w-xs bg-white shadow-lg rounded-2xl p-6 flex flex-col justify-between min-h-[300px]"
                 >
                   <div className="text-center">

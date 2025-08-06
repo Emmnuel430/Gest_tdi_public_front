@@ -85,7 +85,11 @@ const MembresTemplate = ({ page }) => {
                           <span>{new Date(sub.date).toLocaleDateString()}</span>
                         )}
                         {sub.date && sub.prix && " · "}
-                        {sub.prix && <span>{sub.prix} €</span>}
+                        {sub.prix && (
+                          <span>
+                            {parseInt(sub.prix).toLocaleString()} FCFA
+                          </span>
+                        )}
                       </p>
                     )}
 
