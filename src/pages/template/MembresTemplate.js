@@ -23,36 +23,22 @@ const MembresTemplate = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête de page */}
-      {/* <section
-        className={`${
-          page.main_image ? "" : "bg-blue-100"
-        } h-[50vh] bg-cover bg-center flex items-center justify-center`}
-        style={
-          page.main_image
-            ? {
-                backgroundImage: `url(${STORAGE}/${page.main_image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }
-            : { backgroundColor: "#f0f9ff", backgroundSize: "cover" }
-        }
-      >
-        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-            {page.title}
-          </h1>
-          {page.subtitle && (
-            <p className="text-lg text-blue-800">{page.subtitle}</p>
-          )}
-        </div>
-      </section> */}
 
       {/* Section 1 : La Charte */}
       {sectionCharte && (
-        <section className="mb-10 text-center px-4">
+        <section className="mb-10 text-center px-4 space-y-8">
           <h2 className="text-2xl font-semibold mb-2">{sectionCharte.title}</h2>
           {sectionCharte.subtitle && (
             <p className="text-gray-700">{sectionCharte.subtitle}</p>
+          )}
+          {sectionCharte.image && (
+            <div className="flex justify-center">
+              <img
+                src={`${STORAGE}/${sectionCharte.image}`}
+                alt={sectionCharte.title || "Section"}
+                className="rounded-xl w-full max-w-md h-[300px] object-contain shadow"
+              />
+            </div>
           )}
           {sectionCharte.subsections &&
             sectionCharte.subsections.length > 0 && (
@@ -119,6 +105,11 @@ const MembresTemplate = ({ page }) => {
             )}
         </section>
       )}
+
+      <h2 className="text-2xl font-bold text-blue-800 text-center mb-4">
+        Veuillez remplir le formulaire ci-dessous et effectuez le paiement de
+        votre abonnement
+      </h2>
       {/* Formulaire d'adhésion */}
       <section className="my-12 px-4">
         <AdhesionForm />

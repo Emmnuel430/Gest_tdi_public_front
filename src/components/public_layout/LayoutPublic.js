@@ -207,8 +207,10 @@ function LayoutPublic({ children }) {
           <div className="w-full md:w-1/3">
             <img src={logo} alt="logo" className="mx-auto md:mx-0 w-40 h-40" />
             <p className="mt-4 text-sm opacity-70">
-              Une communauté unie par l'Etude de la Torah, par le Service Divin
-              et par les Actes de charité et de bienfaisance.
+              Il est dit dans la Kabbale : La Mission Principale des Femmes et
+              des Hommes, est de semer des Graines de Bonheur en Soi et autour
+              de Soi. L’acceptation de ce point de vue nous permettra de vaincre
+              tous les Obstacles.
             </p>
           </div>
 
@@ -226,13 +228,17 @@ function LayoutPublic({ children }) {
 
           {/* Ressources */}
 
+          <div>
+            <ul className="space-y-2 text-sm">
+              <li>📍 {adresse}</li>
+              <li>📧 {email}</li>
+            </ul>
+          </div>
+
           {/* Contact */}
           <div>
             <h4 className="mb-4 font-bold text-lg">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>📧 {email}</li>
-              <li>📍 {adresse}</li>
-
               {contacts.map((group, idx) => (
                 <React.Fragment key={idx}>
                   <li className="mt-2 font-semibold text-white">
@@ -242,7 +248,7 @@ function LayoutPublic({ children }) {
                     <li key={i} className="pl-4">
                       <a
                         href={`tel:+225${numero.replace(/\s/g, "")}`}
-                        className="hover:text-gray-500 text-white"
+                        className="hover:text-orange-500 text-white"
                       >
                         +225 {numero}
                       </a>
