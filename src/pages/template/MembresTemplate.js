@@ -42,7 +42,7 @@ const MembresTemplate = ({ page }) => {
             )}
             {sectionCharte.subsections &&
               sectionCharte.subsections.length > 0 && (
-                <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3 bg-blue-950 p-4 rounded-2xl shadow">
+                <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-blue-950 p-4 rounded-2xl shadow">
                   {sectionCharte.subsections.map((sub) => (
                     <div
                       key={sub.id}
@@ -53,7 +53,7 @@ const MembresTemplate = ({ page }) => {
                         <img
                           src={`${STORAGE}/${sub.image}`}
                           alt={sub.title || "Subsection"}
-                          className="w-full h-40 object-cover rounded-xl mb-4"
+                          className="w-full h-[200px] object-contain rounded-xl mb-4"
                         />
                       )}
 

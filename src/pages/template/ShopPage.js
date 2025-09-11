@@ -116,7 +116,7 @@ const ShopPage = ({ page }) => {
                     <img
                       src={`${LINK}${produit.image}`}
                       alt={produit.title}
-                      className="w-full max-h-62 object-contain mb-4 bg-white rounded-lg"
+                      className="w-full h-[200px] object-contain mb-4 bg-white rounded-lg"
                     />
                   )}
                   <h2 className="text-xl font-bold text-blue-900">

@@ -50,32 +50,6 @@ const ParachiotPage = ({ page }) => {
   return (
     <LayoutPublic>
       {/* En-tête de page */}
-      {/* <section
-        className={`${
-          page.main_image ? "" : "bg-blue-100"
-        }h-[50vh] bg-cover bg-center flex items-center justify-center`}
-        style={
-          page.main_image
-            ? {
-                backgroundImage: `url(${STORAGE}/${page.main_image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }
-            : {
-                backgroundColor: "#f0f9ff", // Couleur de fond si pas d'image
-                backgroundSize: "cover",
-              }
-        }
-      >
-        <div className="max-w-xl bg-white/80 p-8 rounded-lg shadow-lg">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
-            {page.title}
-          </h1>
-          {page.subtitle && (
-            <p className="text-lg text-blue-800">{page.subtitle}</p>
-          )}
-        </div>
-      </section> */}
 
       {/* Sections dynamiques */}
       <section className="px-4 md:px-16 bg-white pb-20">
@@ -110,7 +84,7 @@ const ParachiotPage = ({ page }) => {
 
             {/* Sous-sections comme d’habitude */}
             {lastSection.subsections.length > 0 && (
-              <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3 mt-4">
+              <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
                 {lastSection.subsections.map((sub) => (
                   <div
                     key={sub.id}
@@ -120,7 +94,7 @@ const ParachiotPage = ({ page }) => {
                       <img
                         src={`${STORAGE}/${sub.image}`}
                         alt={sub.title || "Subsection"}
-                        className="w-full h-40 object-cover rounded-xl mb-4"
+                        className="w-full h-[200px] object-contain rounded-xl mb-4"
                       />
                     )}
                     {sub.title && (
