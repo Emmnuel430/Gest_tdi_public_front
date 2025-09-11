@@ -99,7 +99,7 @@ const ShopPage = ({ page }) => {
             Aucun produit disponible pour le moment.
           </p>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 bg-blue-950 p-4 rounded-2xl shadow">
             {produits.map((produit) => {
               const isSelected = selectedProduits.some(
                 (p) => p.id === produit.id

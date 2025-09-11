@@ -26,90 +26,94 @@ const MembresTemplate = ({ page }) => {
 
       {/* Section 1 : La Charte */}
       {sectionCharte && (
-        <section className="mb-10 text-center px-4 space-y-8">
-          <h2 className="text-2xl font-semibold mb-2">{sectionCharte.title}</h2>
-          {sectionCharte.subtitle && (
-            <p className="text-gray-700">{sectionCharte.subtitle}</p>
-          )}
-          {sectionCharte.image && (
-            <div className="flex justify-center">
-              <img
-                src={`${STORAGE}/${sectionCharte.image}`}
-                alt={sectionCharte.title || "Section"}
-                className="rounded-xl w-full max-w-md h-[300px] object-contain shadow"
-              />
-            </div>
-          )}
-          {sectionCharte.subsections &&
-            sectionCharte.subsections.length > 0 && (
-              <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                {sectionCharte.subsections.map((sub) => (
-                  <div
-                    key={sub.id}
-                    className="bg-white rounded-2xl shadow hover:shadow-lg transition p-5 flex flex-col"
-                  >
-                    {/* Image */}
-                    {sub.image && (
-                      <img
-                        src={`${STORAGE}/${sub.image}`}
-                        alt={sub.title || "Subsection"}
-                        className="w-full h-40 object-cover rounded-xl mb-4"
-                      />
-                    )}
-
-                    {/* Titre */}
-                    {sub.title && (
-                      <h3 className="text-lg font-semibold text-blue-900 mb-1">
-                        {sub.title}
-                      </h3>
-                    )}
-
-                    {/* Date + Prix (infos complémentaires) */}
-                    {(sub.date || sub.prix) && (
-                      <p className="text-sm text-blue-700 mb-2">
-                        {sub.date && (
-                          <span>{new Date(sub.date).toLocaleDateString()}</span>
-                        )}
-                        {sub.date && sub.prix && " · "}
-                        {sub.prix && (
-                          <span>
-                            {parseInt(sub.prix).toLocaleString()} FCFA
-                          </span>
-                        )}
-                      </p>
-                    )}
-
-                    {/* Contenu HTML */}
-                    {sub.content && (
-                      <div className="text-sm text-blue-800 flex-grow flex flex-col justify-between">
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: truncate(sub.content, 150),
-                          }}
-                        />
-                        {sub.content &&
-                          sub.content.replace(/<[^>]*>?/gm, "").length >
-                            150 && (
-                            <Link
-                              to={`/subsection/${sub.id}`}
-                              className="text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
-                            >
-                              Lire plus →
-                            </Link>
-                          )}
-                      </div>
-                    )}
-                  </div>
-                ))}
+        <>
+          <section className="mb-10 text-center px-4 space-y-8">
+            <h2 className="text-2xl font-semibold mb-2">
+              {sectionCharte.title}
+            </h2>
+            {sectionCharte.image && (
+              <div className="flex justify-center">
+                <img
+                  src={`${STORAGE}/${sectionCharte.image}`}
+                  alt={sectionCharte.title || "Section"}
+                  className="rounded-xl w-full max-w-md h-[300px] object-contain shadow"
+                />
               </div>
             )}
-        </section>
+            {sectionCharte.subsections &&
+              sectionCharte.subsections.length > 0 && (
+                <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-3 bg-blue-950 p-4 rounded-2xl shadow">
+                  {sectionCharte.subsections.map((sub) => (
+                    <div
+                      key={sub.id}
+                      className="bg-white rounded-2xl shadow hover:shadow-lg transition p-5 flex flex-col"
+                    >
+                      {/* Image */}
+                      {sub.image && (
+                        <img
+                          src={`${STORAGE}/${sub.image}`}
+                          alt={sub.title || "Subsection"}
+                          className="w-full h-40 object-cover rounded-xl mb-4"
+                        />
+                      )}
+
+                      {/* Titre */}
+                      {sub.title && (
+                        <h3 className="text-lg font-semibold text-blue-900 mb-1">
+                          {sub.title}
+                        </h3>
+                      )}
+
+                      {/* Date + Prix (infos complémentaires) */}
+                      {(sub.date || sub.prix) && (
+                        <p className="text-sm text-blue-700 mb-2">
+                          {sub.date && (
+                            <span>
+                              {new Date(sub.date).toLocaleDateString()}
+                            </span>
+                          )}
+                          {sub.date && sub.prix && " · "}
+                          {sub.prix && (
+                            <span>
+                              {parseInt(sub.prix).toLocaleString()} FCFA
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      {/* Contenu HTML */}
+                      {sub.content && (
+                        <div className="text-sm text-blue-800 flex-grow flex flex-col justify-between">
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: truncate(sub.content, 150),
+                            }}
+                          />
+                          {sub.content &&
+                            sub.content.replace(/<[^>]*>?/gm, "").length >
+                              150 && (
+                              <Link
+                                to={`/subsection/${sub.id}`}
+                                className="text-yellow-600 font-bold hover:underline text-xs mt-2 inline-block p-2 border border-yellow-600 bg-yellow-50 rounded"
+                              >
+                                Lire plus →
+                              </Link>
+                            )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+          </section>
+          {sectionCharte.subtitle && (
+            <h2 className="text-2xl font-bold text-blue-800 text-center mb-4">
+              {sectionCharte.subtitle}
+            </h2>
+          )}
+        </>
       )}
 
-      <h2 className="text-2xl font-bold text-blue-800 text-center mb-4">
-        Veuillez remplir le formulaire ci-dessous et effectuez le paiement de
-        votre abonnement
-      </h2>
       {/* Formulaire d'adhésion */}
       <section className="my-12 px-4">
         <AdhesionForm />

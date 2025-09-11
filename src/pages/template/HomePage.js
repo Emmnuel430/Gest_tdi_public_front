@@ -135,11 +135,11 @@ const HomePage = ({ page }) => {
 
                 {/* Sous-sections */}
                 {section.subsections.length > 0 && (
-                  <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                  <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-blue-950 p-4 rounded-2xl shadow">
                     {section.subsections.map((sub) => (
                       <div
                         key={sub.id}
-                        className="bg-blue-950 rounded-2xl shadow hover:shadow-lg transition p-2 flex flex-col overflow-hidden"
+                        className="bg-white rounded-2xl shadow hover:shadow-lg transition p-2 flex flex-col overflow-hidden"
                       >
                         {/* Image sous-section */}
                         <div className="w-full h-[200px] flex items-center justify-center bg-white">
@@ -158,7 +158,7 @@ const HomePage = ({ page }) => {
                         </div>
 
                         {/* Texte sous-section */}
-                        <div className="p-3 text-white flex flex-col justify-between flex-grow">
+                        <div className="p-3 text-blue-900 flex flex-col justify-between flex-grow">
                           <div>
                             <h5 className="text-md font-semibold">
                               {sub.title}
@@ -173,7 +173,7 @@ const HomePage = ({ page }) => {
                             )}
                           </div>
                           {sub.content && (
-                            <div className="text-sm text-white mt-2">
+                            <div className="text-sm text-blue-800 mt-2">
                               <div
                                 dangerouslySetInnerHTML={{
                                   __html: getPreview(sub.content, 100),

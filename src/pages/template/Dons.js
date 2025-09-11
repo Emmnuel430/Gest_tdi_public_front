@@ -33,8 +33,11 @@ const Dons = ({ page }) => {
       {/* Contenu dons */}
       <section className="container mx-auto px-4 py-12">
         {page.sections.map((section) => (
-          <div key={section.id} className="mb-16">
-            <h2 className="text-2xl font-bold text-center text-blue-900 mb-8">
+          <div
+            key={section.id}
+            className="mb-16 bg-blue-950 p-4 rounded-2xl shadow"
+          >
+            <h2 className="text-2xl font-bold text-center text-white mb-8">
               {section.title}
             </h2>
 
