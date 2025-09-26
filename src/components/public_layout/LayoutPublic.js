@@ -202,61 +202,56 @@ function LayoutPublic({ children }) {
         </div>
 
         {/* Contenu principal */}
-        <div className="container mx-auto px-6 flex flex-col md:flex-row gap-10 text-center md:text-left justify-around">
-          {/* Logo */}
-          <div className="w-full md:w-1/3">
-            <img src={logo} alt="logo" className="mx-auto md:mx-0 w-40 h-40" />
-            <p className="mt-4 text-sm opacity-70">
-              Il est dit dans la Kabbale : La Mission Principale des Femmes et
-              des Hommes, est de semer des Graines de Bonheur en Soi et autour
-              de Soi. L’acceptation de ce point de vue nous permettra de vaincre
-              tous les Obstacles.
-            </p>
-          </div>
+        <div className="container mx-auto px-6">
+          <div className="flex flex-wrap gap-4 justify-around text-center lg:text-left">
+            {/* Logo */}
+            <div className="w-full md:w-1/2 lg:w-[35%]">
+              <img
+                src={logo}
+                alt="logo"
+                className="mx-auto lg:mx-0 w-40 h-40"
+              />
+              <p className="mt-4 text-sm opacity-70">
+                Il est dit dans la Kabbale : La Mission Principale des Femmes et
+                des Hommes, est de semer des Graines de Bonheur en Soi et autour
+                de Soi. L’acceptation de ce point de vue nous permettra de
+                vaincre tous les Obstacles.
+              </p>
+            </div>
 
-          {/* Liens utiles */}
-          {/* <div>
-            <h4 className="mb-4 font-bold text-lg">Navigation</h4>
-            <ul className="space-y-2">
-              {links.map((link) => (
-                <li key={link.to}>
-                  <Link to={link.to}>{link.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
+            {/* Ressources */}
 
-          {/* Ressources */}
+            <div className="w-full sm:w-[48%] lg:w-[25%]">
+              <h4 className="mb-4 font-bold text-lg">Adresses</h4>
+              <ul className="space-y-2 text-sm">
+                <li>📍 {adresse}</li>
+                <li>📧 {email}</li>
+              </ul>
+            </div>
 
-          <div>
-            <ul className="space-y-2 text-sm">
-              <li>📍 {adresse}</li>
-              <li>📧 {email}</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="mb-4 font-bold text-lg">Contact</h4>
-            <ul className="space-y-2 text-sm">
-              {contacts.map((group, idx) => (
-                <React.Fragment key={idx}>
-                  <li className="mt-2 font-semibold text-white">
-                    📞 {group.label}
-                  </li>
-                  {group.numeros.map((numero, i) => (
-                    <li key={i} className="pl-4">
-                      <a
-                        href={`tel:+225${numero.replace(/\s/g, "")}`}
-                        className="hover:text-orange-500 text-white"
-                      >
-                        +225 {numero}
-                      </a>
+            {/* Contacts */}
+            <div className="w-full sm:w-[48%] lg:w-[30%]">
+              <h4 className="mb-4 font-bold text-lg">Contacts</h4>
+              <ul className="space-y-2 text-sm">
+                {contacts.map((group, idx) => (
+                  <React.Fragment key={idx}>
+                    <li className="mt-2 font-semibold text-white">
+                      📞 {group.label}
                     </li>
-                  ))}
-                </React.Fragment>
-              ))}
-            </ul>
+                    {group.numeros.map((numero, i) => (
+                      <li key={i} className="pl-4">
+                        <a
+                          href={`tel:+225${numero.replace(/\s/g, "")}`}
+                          className="hover:text-orange-500 text-white"
+                        >
+                          +225 {numero}
+                        </a>
+                      </li>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
