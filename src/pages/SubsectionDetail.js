@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LayoutPublic from "../components/public_layout/LayoutPublic";
 import Loader from "../components/Layout/Loader";
+import { Helmet } from "react-helmet-async";
 
 export default function SubsectionDetail() {
   const { id } = useParams();
@@ -50,6 +51,14 @@ export default function SubsectionDetail() {
     );
   };
 
+  const sanitize = (text) =>
+    text
+      ? text
+          .replace(/<[^>]+>/g, "")
+          .replace(/["']/g, "")
+          .slice(0, 200)
+      : "";
+
   return (
     <LayoutPublic>
       {loading ? (
@@ -60,6 +69,54 @@ export default function SubsectionDetail() {
         <p className="text-center text-red-500">Contenu introuvable.</p>
       ) : (
         <>
+          {/* Balises SEO dynamiques */}
+          <Helmet>
+            <title>{sub.title} | Torah Diffusion Internationale</title>
+            <meta
+              name="description"
+              content={
+                sub.content
+                  ? sub.content.replace(/<[^>]+>/g, "").slice(0, 160)
+                  : "Découvrez nos enseignements et nos ressources."
+              }
+            />
+
+            {/* Open Graph */}
+            <meta property="og:type" content="article" />
+            <meta
+              property="og:url"
+              content={`https://www.torahdiffusion.ci/subsection/${id}`}
+            />
+            <meta property="og:title" content={sub.title} />
+            <meta
+              property="og:description"
+              content={sub.content ? sanitize(sub.content) : ""}
+            />
+            <meta
+              property="og:image"
+              content={
+                sub.image
+                  ? `${LINK}/storage/${sub.image}`
+                  : "https://www.torahdiffusion.ci/static/media/logo.2de02bb2e7c86204209a.png"
+              }
+            />
+
+            {/* Twitter */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content={sub.title} />
+            <meta
+              name="twitter:description"
+              content={sub.content ? sanitize(sub.content) : ""}
+            />
+            <meta
+              name="twitter:image"
+              content={
+                sub.image
+                  ? `${LINK}/storage/${sub.image}`
+                  : "https://www.torahdiffusion.ci/static/media/logo.2de02bb2e7c86204209a.png"
+              }
+            />
+          </Helmet>
           <div className="max-w-4xl mt-[11rem] lg:mt-[19rem] mb-3 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
             {/* Titre */}
             <h2 className="text-3xl font-semibold text-gray-800">
