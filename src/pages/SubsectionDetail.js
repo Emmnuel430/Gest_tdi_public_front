@@ -41,7 +41,7 @@ export default function SubsectionDetail() {
         : "";
 
     // Title
-    document.title = `${sub.title} | Torah Diffusion Internationale`;
+    // document.title = `${sub.title} | Torah Diffusion Internationale`;
 
     // Description
     const desc = cleanText(sub.content);
