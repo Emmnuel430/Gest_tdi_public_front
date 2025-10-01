@@ -27,6 +27,72 @@ export default function SubsectionDetail() {
       });
   }, [id, LINK]);
 
+  // Metas dynamiques côté client (UX humaine uniquement)
+  useEffect(() => {
+    if (!sub) return;
+
+    const cleanText = (html, length = 160) =>
+      html
+        ? html
+            .replace(/<[^>]+>/g, "") // supprime balises HTML
+            .replace(/\s+/g, " ")
+            .trim()
+            .slice(0, length)
+        : "";
+
+    // Title
+    document.title = `${sub.title} | Torah Diffusion Internationale`;
+
+    // Description
+    const desc = cleanText(sub.content);
+    const setMeta = (attr, key, val) => {
+      let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, key);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", val || "");
+    };
+
+    setMeta("name", "description", desc);
+
+    // Open Graph
+    setMeta("property", "og:title", sub.title);
+    setMeta("property", "og:description", cleanText(sub.content, 200));
+    setMeta(
+      "property",
+      "og:image",
+      sub.image ? `${LINK}/storage/${sub.image}` : "/logo.png"
+    );
+    setMeta(
+      "property",
+      "og:url",
+      `https://www.torahdiffusion.ci/subsection/${id}`
+    );
+
+    // Twitter
+    setMeta("name", "twitter:title", sub.title);
+    setMeta("name", "twitter:description", cleanText(sub.content, 200));
+    setMeta(
+      "name",
+      "twitter:image",
+      sub.image ? `${LINK}/storage/${sub.image}` : "/logo.png"
+    );
+
+    // Canonical
+    let canonical = document.head.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute(
+      "href",
+      `https://www.torahdiffusion.ci/subsection/${id}`
+    );
+  }, [sub, id, LINK]);
+
   const cleanHTML = (html) => {
     return (
       html
@@ -50,16 +116,6 @@ export default function SubsectionDetail() {
     );
   };
 
-  const sanitize = (text, length = 160) =>
-    text
-      ? text
-          .replace(/<[^>]+>/g, "") // supprime les balises HTML
-          .replace(/["']/g, "") // évite de casser l’attribut content
-          .replace(/\s+/g, " ") // espaces multiples → 1 espace
-          .trim()
-          .slice(0, length)
-      : "";
-
   return (
     <LayoutPublic>
       {loading ? (
@@ -70,46 +126,6 @@ export default function SubsectionDetail() {
         <p className="text-center text-red-500">Contenu introuvable.</p>
       ) : (
         <>
-          {/* Balises SEO dynamiques */}
-          {/* ✅ Métadonnées natives React 19 */}
-          <title>{sub.title} | Torah Diffusion Internationale</title>
-          <meta name="description" content={sanitize(sub.content)} />
-
-          {/* Open Graph */}
-          <meta property="og:type" content="article" />
-          <meta
-            property="og:url"
-            content={`https://www.torahdiffusion.ci/subsection/${id}`}
-          />
-          <meta property="og:title" content={sub.title} />
-          <meta
-            property="og:description"
-            content={sanitize(sub.content, 200)}
-          />
-          <meta
-            property="og:image"
-            content={
-              sub.image
-                ? `${LINK}/storage/${sub.image}`
-                : "https://www.torahdiffusion.ci/static/media/logo.2de02bb2e7c86204209a.png"
-            }
-          />
-
-          {/* Twitter */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={sub.title} />
-          <meta
-            name="twitter:description"
-            content={sanitize(sub.content, 200)}
-          />
-          <meta
-            name="twitter:image"
-            content={
-              sub.image
-                ? `${LINK}/storage/${sub.image}`
-                : "https://www.torahdiffusion.ci/static/media/logo.2de02bb2e7c86204209a.png"
-            }
-          />
           <div className="max-w-4xl mt-[11rem] lg:mt-[19rem] mb-3 mx-auto p-6 bg-white rounded-2xl shadow-md space-y-6">
             {/* Titre */}
             <h2 className="text-3xl font-semibold text-gray-800">
