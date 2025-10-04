@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "middleware.js": {
+      "memory": 128,
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
