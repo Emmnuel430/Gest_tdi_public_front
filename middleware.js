@@ -41,42 +41,28 @@ const BOT_UA_REGEX = new RegExp(
   "i"
 );
 
-const PRERENDER_SERVICE = "https://service.prerender.io";
 const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN; // définis dans Vercel > Settings > Environment Variables
 
-export async function middleware(request) {
+export default async function middleware(request) {
+  // logique de bot / prerender
   const ua = request.headers.get("user-agent") || "";
-  const url = new URL(request.url);
-
-  // Ne traiter que les GET (évite images, scripts, etc.)
-  if (request.method !== "GET") {
-    return new Response(null, { status: 200 });
-  }
-
-  // ✅ Cas 1 : si c’est un bot → on sert la version Prerender
   if (BOT_UA_REGEX.test(ua)) {
-    const target = `${PRERENDER_SERVICE}/${url.origin}${url.pathname}${url.search}`;
-
-    const prerenderRes = await fetch(target, {
-      method: "GET",
+    const url = new URL(request.url);
+    const prerenderUrl = `https://service.prerender.io/${url.origin}${url.pathname}${url.search}`;
+    const res = await fetch(prerenderUrl, {
       headers: {
         "X-Prerender-Token": PRERENDER_TOKEN || "",
         "User-Agent": ua,
         Accept: "text/html",
       },
     });
-
-    if (prerenderRes.ok) {
-      const body = await prerenderRes.text();
-      return new Response(body, {
-        status: 200,
+    if (res.ok) {
+      const html = await res.text();
+      return new Response(html, {
         headers: { "content-type": "text/html; charset=utf-8" },
       });
     }
-
-    return new Response("Prerender error", { status: 502 });
   }
-
-  // ✅ Cas 2 : utilisateur normal → on laisse passer à React
-  return new Response(null, { status: 200 });
+  // sinon laisser passer
+  return Response.next(); // ou `return new Response(null, { status: 200 });`
 }
