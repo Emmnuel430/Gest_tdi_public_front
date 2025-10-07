@@ -1,4 +1,4 @@
-// middleware.js (React SPA - Edge routing middleware)
+// middleware.js (à la racine du projet)
 const BOT_UA_REGEX = new RegExp(
   "(" +
     [
@@ -9,7 +9,6 @@ const BOT_UA_REGEX = new RegExp(
       "baiduspider",
       "facebookexternalhit",
       "twitterbot",
-      "rogerbot",
       "linkedinbot",
       "embedly",
       "bufferbot",
@@ -66,7 +65,6 @@ export async function middleware(request) {
         });
       }
 
-      // si prerender retourne erreur
       return new Response("Erreur Prerender", { status: 502 });
     }
 
@@ -74,15 +72,14 @@ export async function middleware(request) {
     return Response.next();
   } catch (err) {
     console.error("Erreur middleware :", err);
-    // fallback : laisser passer
     return Response.next();
   }
 }
 
-// Optionnel : config matcher pour ne pas intercepter assets statiques
 export const config = {
   matcher: [
     // intercepter tout sauf fichiers statiques
-    "/((?!_next/static|favicon.ico|.*\\.(js|css|png|jpg|svg)).*)",
+    // sans groupe capturant !
+    "/(?!_next/static|favicon.ico|.*\\.(js|css|png|jpg|jpeg|svg|webp|ico))",
   ],
 };
