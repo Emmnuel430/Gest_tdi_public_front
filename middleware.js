@@ -40,7 +40,7 @@ const BOT_UA_REGEX = new RegExp(
   "i"
 );
 
-const PRERENDER_TOKEN = process.env.PRERENDER_TOKEN;
+const PRERENDER_TOKEN = process.env.REACT_APP_PRERENDER_TOKEN;
 
 export async function middleware(request) {
   try {
@@ -76,10 +76,10 @@ export async function middleware(request) {
   }
 }
 
-export const config = {
-  matcher: [
-    // intercepter tout sauf fichiers statiques
-    // sans groupe capturant !
-    "/(?!_next/static|favicon.ico|.*\\.(js|css|png|jpg|jpeg|svg|webp|ico))",
-  ],
-};
+// export const config = {
+//   matcher: [
+//     // intercepter tout sauf fichiers statiques
+//     // sans groupe capturant !
+//     "/(?!_next/static|favicon.ico|.*\\.(js|css|png|jpg|jpeg|svg|webp|ico))",
+//   ],
+// };
