@@ -1,44 +1,38 @@
-// middleware.js (à la racine du projet)
-const BOT_UA_REGEX = new RegExp(
-  "(" +
-    [
-      "googlebot",
-      "yahoo",
-      "bingbot",
-      "yandex",
-      "baiduspider",
-      "facebookexternalhit",
-      "twitterbot",
-      "linkedinbot",
-      "embedly",
-      "bufferbot",
-      "quora link preview",
-      "showyoubot",
-      "outbrain",
-      "pinterest",
-      "pinterest/0\\.",
-      "developers\\.google\\.com/\\+/web/snippet",
-      "www\\.google\\.com/webmasters/tools/richsnippets",
-      "slackbot",
-      "vkShare",
-      "W3C_Validator",
-      "redditbot",
-      "Applebot",
-      "WhatsApp",
-      "flipboard",
-      "tumblr",
-      "bitlybot",
-      "SkypeUriPreview",
-      "nuzzel",
-      "Discordbot",
-      "Google Page Speed",
-      "Qwantify",
-    ]
-      .map((s) => s.replace(/\./g, "\\."))
-      .join("|") +
-    ")",
-  "i"
-);
+const bots = [
+  "googlebot",
+  "yahoo",
+  "bingbot",
+  "yandex",
+  "baiduspider",
+  "facebookexternalhit",
+  "twitterbot",
+  "linkedinbot",
+  "embedly",
+  "bufferbot",
+  "quora link preview",
+  "showyoubot",
+  "outbrain",
+  "pinterest",
+  "pinterest/0\\.",
+  "developers\\.google\\.com/\\+/web/snippet",
+  "www\\.google\\.com/webmasters/tools/richsnippets",
+  "slackbot",
+  "vkShare",
+  "W3C_Validator",
+  "redditbot",
+  "Applebot",
+  "WhatsApp",
+  "flipboard",
+  "tumblr",
+  "bitlybot",
+  "SkypeUriPreview",
+  "nuzzel",
+  "Discordbot",
+  "Google Page Speed",
+  "Qwantify",
+]
+
+const BOT_UA_REGEX = new RegExp(bots.join("|"), "i");
 
 const PRERENDER_TOKEN = process.env.REACT_APP_PRERENDER_TOKEN;
 
